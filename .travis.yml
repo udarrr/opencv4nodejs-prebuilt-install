@@ -35,8 +35,8 @@ env:
   #   TAG=3.4.2-contrib
   # - BUILD_TASK=test
   #   TAG=3.4.3
-  # - BUILD_TASK=test
-  #   TAG=3.4.3-contrib
+  - BUILD_TASK=test
+    TAG=3.4.3-contrib
   - BUILD_TASK=prebuild
     TAG=3.4.3-contrib
   # - BUILD_TASK=cover
@@ -84,10 +84,10 @@ matrix:
       node_js: '10'
       env:
         - BUILD_TASK=prebuild
-    # - os: osx
-    #   node_js: 'node'
-    #   env:
-    #     - BUILD_TASK=test
+    - os: osx
+      node_js: 'node'
+      env:
+        - BUILD_TASK=test
     - os: osx
       node_js: 'node'
       env:

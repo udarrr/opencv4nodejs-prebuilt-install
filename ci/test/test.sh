@@ -6,8 +6,10 @@ then
     docker run $image
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]];
 then
-    cd ../../test &&\
-    npm install --unsafe-perm &&\
-    npm run test-appveyor &&\
+    cd ../../ &&\
+    npm install &&\
+    cd test &&\
+    npm install &&\
+    npm test &&\
     npm run test-externalMemTracking
 fi
