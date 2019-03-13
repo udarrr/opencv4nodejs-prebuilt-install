@@ -8,11 +8,11 @@ services:
   - docker
 
 node_js:
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '10'
+  # - '6'
+  # - '7'
+  # - '8'
+  # - '9'
+  # - '10'
   - 'node'
 
 env:
@@ -48,42 +48,42 @@ matrix:
     #   node_js: '6'
     #   env:
     #     - BUILD_TASK=test
-    - os: osx
-      node_js: '6'
-      env:
-        - BUILD_TASK=prebuild
+    # - os: osx
+    #   node_js: '6'
+    #   env:
+    #     - BUILD_TASK=prebuild
     # - os: osx
     #   node_js: '7'
     #   env:
     #     - BUILD_TASK=test
-    - os: osx
-      node_js: '7'
-      env:
-        - BUILD_TASK=prebuild
+    # - os: osx
+    #   node_js: '7'
+    #   env:
+    #     - BUILD_TASK=prebuild
     # - os: osx
     #   node_js: '8'
     #   env:
     #     - BUILD_TASK=test
-    - os: osx
-      node_js: '8'
-      env:
-        - BUILD_TASK=prebuild
+    # - os: osx
+    #   node_js: '8'
+    #   env:
+    #     - BUILD_TASK=prebuild
     # - os: osx
     #   node_js: '9'
     #   env:
     #     - BUILD_TASK=test
-    - os: osx
-      node_js: '9'
-      env:
-        - BUILD_TASK=prebuild
+    # - os: osx
+    #   node_js: '9'
+    #   env:
+    #     - BUILD_TASK=prebuild
     # - os: osx
     #   node_js: '10'
     #   env:
     #     - BUILD_TASK=test
-    - os: osx
-      node_js: '10'
-      env:
-        - BUILD_TASK=prebuild
+    # - os: osx
+    #   node_js: '10'
+    #   env:
+    #     - BUILD_TASK=prebuild
     - os: osx
       node_js: 'node'
       env:
@@ -104,12 +104,10 @@ script:
   - if [[ $BUILD_TASK != "prebuild" ]]; then
     cd ./ci/$BUILD_TASK;
     npm run $BUILD_TASK $TAG;
-    cd -;
     fi
   - if [[ $BUILD_TASK == "prebuild" && $TRAVIS_TAG != "" ]]; then
     cd ./ci/$BUILD_TASK;
     npm run $BUILD_TASK $TAG;
-    cd -;
     fi
 
 after_success:
