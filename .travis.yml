@@ -18,78 +18,99 @@ node_js:
 env:
   global:
     - OPENCV4NODEJS_DISABLE_AUTOBUILD=1
-  matrix:
-  # - BUILD_TASK=test
-  #   TAG=3.0.0-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.1.0-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.2.0-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.3.0-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.4.0-contrib-world
-  # - BUILD_TASK=test
-  #   TAG=3.4.1-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.4.2-contrib
-  # - BUILD_TASK=test
-  #   TAG=3.4.3
-  - BUILD_TASK=test
-    TAG=3.4.3-contrib
-  - BUILD_TASK=prebuild
-    TAG=3.4.3-contrib
-  # - BUILD_TASK=cover
-  #   TAG=3.4.3-contrib
 
 matrix:
   include:
-    # - os: osx
-    #   node_js: '6'
-    #   env:
-    #     - BUILD_TASK=test
-    # - os: osx
-    #   node_js: '6'
-    #   env:
-    #     - BUILD_TASK=prebuild
-    # - os: osx
-    #   node_js: '7'
-    #   env:
-    #     - BUILD_TASK=test
-    # - os: osx
-    #   node_js: '7'
-    #   env:
-    #     - BUILD_TASK=prebuild
-    # - os: osx
-    #   node_js: '8'
-    #   env:
-    #     - BUILD_TASK=test
-    # - os: osx
-    #   node_js: '8'
-    #   env:
-    #     - BUILD_TASK=prebuild
-    # - os: osx
-    #   node_js: '9'
-    #   env:
-    #     - BUILD_TASK=test
-    # - os: osx
-    #   node_js: '9'
-    #   env:
-    #     - BUILD_TASK=prebuild
-    # - os: osx
-    #   node_js: '10'
-    #   env:
-    #     - BUILD_TASK=test
-    # - os: osx
-    #   node_js: '10'
-    #   env:
-    #     - BUILD_TASK=prebuild
-    - os: osx
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.0.0-contrib-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.1.0-contrib-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.2.0-contrib-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.3.0-contrib-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.4.0-contrib-world-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.4.6-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.4.6-contrib-node6
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.4.6-contrib-node8
+    - os: linux
+      env:
+        - BUILD_TASK=test
+          TAG=3.4.6-contrib-node10
+    - os: linux
+      env:
+        - BUILD_TASK=cover
+          TAG=3.4.6-contrib-node11
+    - os: linux
+      node_js: '6'
+      env:
+        - BUILD_TASK=prebuild
+    - os: linux
+      node_js: '8'
+      env:
+        - BUILD_TASK=prebuild
+    - os: linux
+      node_js: '10'
+      env:
+        - BUILD_TASK=prebuild
+    - os: linux
+      node_js: '11'
+      env:
+        - BUILD_TASK=prebuild
+    - os: linux
       node_js: 'node'
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: '6'
       env:
         - BUILD_TASK=test
     - os: osx
-      node_js: 'node'
+      node_js: '6'
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: '8'
+      env:
+        - BUILD_TASK=test
+    - os: osx
+      node_js: '8'
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: '10'
+      env:
+        - BUILD_TASK=test
+    - os: osx
+      node_js: '10'
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: '11'
+      env:
+        - BUILD_TASK=test
+    - os: osx
+      node_js: '11'
       env:
         - BUILD_TASK=prebuild
 
@@ -97,7 +118,7 @@ before_install:
   - chmod +x ./ci/$BUILD_TASK/$BUILD_TASK.sh;
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis_wait 30 docker pull justadudewhohacks/opencv4nodejs-ci:$TAG; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" && $TAG != "" ]]; then travis_wait 30 docker pull justadudewhohacks/opencv4nodejs-ci:$TAG; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install opencv@3; brew link --force opencv@3; fi
 
 script:
