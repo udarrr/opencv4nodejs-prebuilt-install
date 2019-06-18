@@ -1,132 +1,134 @@
-#include <macro-inferno.h>
 #include "NativeNodeUtils.h"
+#include <opencv2/core.hpp>
 
 #ifndef __FF_MACROS_H__
 #define __FF_MACROS_H__
 
-#define FF_NEW_INSTANCE(ctor) Nan::NewInstance(Nan::New(ctor)->GetFunction()).ToLocalChecked()
+#define CV_VERSION_GREATER_EQUAL(major, minor, revision) \
+	(	\
+		CV_VERSION_MAJOR > major  \
+		|| (CV_VERSION_MAJOR == major && CV_VERSION_MINOR > minor) \
+		|| (CV_VERSION_MAJOR == major && CV_VERSION_MINOR == minor && CV_VERSION_REVISION >= revision) \
+	)
 
-#define FF_GETTER(clazz, name, prop)	\
-	NAN_GETTER(name) { info.GetReturnValue().Set(Nan::ObjectWrap::Unwrap<clazz>(info.This())->prop); }
+#define CV_VERSION_LOWER_THAN(major, minor, revision) \
+	!(CV_VERSION_GREATER_EQUAL(major, minor, revision))
 
-#define FF_GETTER_SIMPLE(clazz, name, prop, converter)  \
-	NAN_GETTER(name) { 																		\
-		v8::Local<v8::Value> jsValue = converter::wrap(			\
-			Nan::ObjectWrap::Unwrap<clazz>(info.This())->prop	\
-		);																									\
-		info.GetReturnValue().Set(jsValue);									\
+/* define getters, custom expression for accessing properties of "self" */
+#define FF_GETTER_CUSTOM(ff_property_name, ff_property_converter, ff_access_property_expr) \
+	static ff_property_converter::Type getProperty_##ff_property_name(ClassType* self) { \
+		return self->ff_access_property_expr; \
+	} \
+	static NAN_GETTER(ff_property_name##_getter) { \
+		getter<ff_property_converter>(info, getProperty_##ff_property_name); \
 	}
 
-#define FF_GETTER_COMPLEX(clazz, name, prop, converter) FF_GETTER_SIMPLE(clazz, name, prop, converter)
+/* define getters */
+#define FF_GETTER(ff_property_name, ff_property_converter) \
+	FF_GETTER_CUSTOM(ff_property_name, ff_property_converter, self.ff_property_name)
 
-#define FF_GETTER_JSOBJ(clazz, name, value, unwrapper, ctor)	\
-	NAN_GETTER(name) {																					\
-		v8::Local<v8::Object> jsObj = FF_NEW_INSTANCE(ctor);			\
-		unwrapper(jsObj) = FF_UNWRAP(info.This(), clazz)->value;	\
-		info.GetReturnValue().Set(jsObj);													\
+/* define accessors, custom expression for accessing properties of "self" */
+#define FF_ACCESSORS_CUSTOM(ff_property_name, ff_property_converter, ff_access_property_expr) \
+	FF_GETTER_CUSTOM(ff_property_name, ff_property_converter, ff_access_property_expr); \
+	static void setProperty_##ff_property_name(ClassType* self, ff_property_converter::Type val) { \
+		self->ff_access_property_expr = val; \
+	} \
+	static NAN_SETTER(ff_property_name##_setter) { \
+		setter<ff_property_converter>(#ff_property_name, info, value, setProperty_##ff_property_name); \
 	}
 
-#define FF_SET_JS_PROP(obj, prop, val) Nan::Set(obj, FF_NEW_STRING(#prop), val)
+/* define accessors */
+#define FF_ACCESSORS(ff_property_name, ff_property_converter) \
+	FF_ACCESSORS_CUSTOM(ff_property_name, ff_property_converter, self.ff_property_name)
+
+/* define accessors, self is pointer type */
+#define FF_ACCESSORS_PTR(ff_property_name, ff_property_converter) \
+	FF_ACCESSORS_CUSTOM(ff_property_name, ff_property_converter, self->ff_property_name)
+
+#define FF_SET_JS_PROP(obj, prop, val) Nan::Set(obj, FF::newString(#prop), val)
 
 #define FF_SET_CV_CONSTANT(obj, cvConstant) \
 	FF_SET_JS_PROP(obj, cvConstant, Nan::New<v8::Integer>(cvConstant));
 
-#define FF_REQUIRE_INSTANCE(objCtor, obj, err)	\
-	if (!FF_IS_INSTANCE(objCtor, obj)) {					\
-			return Nan::ThrowError(err);							\
-	}
-
-#define FF_GET_UNPACK_UCHAR_ARRAY_IFDEF(ff_obj, ff_var, ff_prop, ff_defaultValue) FF_GET_UNPACK_ARRAY_IFDEF(ff_obj, ff_var, ff_prop, uchar, ff_uint, ff_defaultValue)
-#define FF_ARG_UNPACK_UCHAR_ARRAY_TO_IFDEF(ff_argN, ff_var, ff_defaultValue) FF_ARG_UNPACK_ARRAY_TO_IFDEF(ff_argN, ff_var, ff_uint, ff_defaultValue)
-
-/* unwrappers */
-
-#define FF_UNWRAP(obj, clazz)	Nan::ObjectWrap::Unwrap<clazz>(obj)
-
-#define FF_UNWRAP_MAT(obj) FF_UNWRAP(obj, Mat)
-#define FF_UNWRAP_MAT_AND_GET(obj) FF_UNWRAP_MAT(obj)->mat
-
-#define FF_UNWRAP_VEC2(obj) FF_UNWRAP(obj, Vec2)
-#define FF_UNWRAP_VEC2_AND_GET(obj) FF_UNWRAP_VEC2(obj)->vec
-
-#define FF_UNWRAP_VEC3(obj) FF_UNWRAP(obj, Vec3)
-#define FF_UNWRAP_VEC3_AND_GET(obj) FF_UNWRAP_VEC3(obj)->vec
-
-#define FF_UNWRAP_VEC4(obj) FF_UNWRAP(obj, Vec4)
-#define FF_UNWRAP_VEC4_AND_GET(obj) FF_UNWRAP_VEC4(obj)->vec
-
-#define FF_UNWRAP_PT2(obj) FF_UNWRAP(obj, Point2)
-#define FF_UNWRAP_PT2_AND_GET(obj) FF_UNWRAP_PT2(obj)->pt
-
-#define FF_UNWRAP_PT3(obj) FF_UNWRAP(obj, Point3)
-#define FF_UNWRAP_PT3_AND_GET(obj) FF_UNWRAP_PT3(obj)->pt
-
-#define FF_UNWRAP_SIZE(obj)	FF_UNWRAP(obj, Size)
-#define FF_UNWRAP_SIZE_AND_GET(obj)	FF_UNWRAP_SIZE(obj)->size
-
-#define FF_UNWRAP_CONTOUR(obj) FF_UNWRAP(obj, Contour)
-#define FF_UNWRAP_CONTOUR_AND_GET(obj) FF_UNWRAP_CONTOUR(obj)->contour
-
-#define FF_UNWRAP_RECT(obj) FF_UNWRAP(obj, Rect)
-#define FF_UNWRAP_RECT_AND_GET(obj)	FF_UNWRAP_RECT(obj)->rect
-
-#define FF_UNWRAP_ROTATEDRECT(obj) FF_UNWRAP(obj, RotatedRect)
-#define FF_UNWRAP_ROTATEDRECT_AND_GET(obj) FF_UNWRAP_ROTATEDRECT(obj)->rect
-
-#define FF_UNWRAP_TRAINDATA(obj) FF_UNWRAP(obj, TrainData)
-#define FF_UNWRAP_TRAINDATA_AND_GET(obj) FF_UNWRAP_TRAINDATA(obj)->trainData
-
-#define FF_UNWRAP_TERMCRITERA(obj) FF_UNWRAP(obj, TermCriteria)
-#define FF_UNWRAP_TERMCRITERA_AND_GET(obj) FF_UNWRAP_TERMCRITERA(obj)->termCriteria
-
-/* TODO: move this to macro-inferno */
-#define FF_IS_FUNC(val) val->IsFunction()
-#define FF_CAST_FUNC(val) val.As<v8::Function>()
-struct FF_TYPE(FUNC, v8::Local<v8::Function>, FF_IS_FUNC, FF_CAST_FUNC);
-static FF_FUNC_TYPE ff_func = FF_FUNC_TYPE();
-#define FF_ARG_FUNC(argN, var) FF_ARG(argN, var, ff_func)
-
-#define FF_ARG_IS_OBJECT(argN) FF_HAS_ARG(argN) && info[argN]->IsObject() && !info[argN]->IsArray() && !info[argN]->IsFunction()
-
-#define FF_ASSERT_CONSTRUCT_CALL(ctor)																\
-  if (!info.IsConstructCall()) {																			\
-    return Nan::ThrowError(FF_NEW_STRING(std::string(#ctor)						\
-        + "::New -  expect to be called with \"new\"")); 							\
+#define FF_ASSERT_CONSTRUCT_CALL() \
+  if (!info.IsConstructCall()) { \
+    return tryCatch.throwError("constructor has to be called with \"new\" keyword"); \
   }
 
-/* for setters */
-#define FF_REQUIRE_VALUE(ff_value, ff_type)													\
-  if (!ff_type.checkType(ff_value)) {																\
-    FF_THROW("expected value to be of type: " + ff_type.typeName);	\
-  }
+/* TODO: move this to native-node-utils */
+namespace FF {
+	template<class TEnum>
+	class EnumConverterImpl : public FF::UnwrapperBase<EnumConverterImpl<TEnum>, typename TEnum::Type> {
+	public:
+		typedef typename TEnum::Type Type;
 
-#define FF_SETTER(clazz, name, prop, ff_type)																\
-	NAN_SETTER(name##Set) {																										\
-		FF_METHOD_CONTEXT(#name);																								\
-		FF_REQUIRE_VALUE(value, ff_type);																				\
-		Nan::ObjectWrap::Unwrap<clazz>(info.This())->prop = ff_type.cast(value);\
-	}
+		static std::string getTypeName() {
+			std::vector<const char*> mappings = TEnum::getEnumMappings();
+			std::string typeName = "";
+			for (uint i = 0; i < mappings.size(); i++) {
+				typeName += mappings[i];
+				if (i < (mappings.size() - 1)) {
+					typeName += " | ";
+				}
+			}
+			return typeName;
+		}
 
-#define FF_SETTER_INT(clazz, name, prop) FF_SETTER(clazz, name, prop, ff_int)
-#define FF_SETTER_UINT(clazz, name, prop) FF_SETTER(clazz, name, prop, ff_uint)
-#define FF_SETTER_NUMBER(clazz, name, prop) FF_SETTER(clazz, name, prop, ff_number)
-#define FF_SETTER_BOOL(clazz, name, prop) FF_SETTER(clazz, name, prop, ff_bool)
-#define FF_SETTER_STRING(clazz, name, prop) FF_SETTER(clazz, name, prop, ff_string)
+		static bool assertType(v8::Local<v8::Value> jsVal) {
+			return getMappingIndex(jsVal) != -1;
+		}
 
-#define FF_SETTER_SIMPLE(clazz, name, prop, converter)  										\
-	NAN_SETTER(name##Set) {																										\
-		FF_METHOD_CONTEXT(#name);												      									\
-		Nan::ObjectWrap::Unwrap<clazz>(info.This())->prop = converter::unwrap(	\
-			value																																	\
-		);																																			\
-	}
+		static Type unwrapUnchecked(v8::Local<v8::Value> jsVal) {
+			int idx = getMappingIndex(jsVal);
+			if (idx == -1) {
+				idx = 0;
+			}
+			return TEnum::getEnumValues()[idx];
+		}
 
-#define FF_SETTER_COMPLEX(clazz, name, prop, type, converter) 	\
-	NAN_SETTER(name##Set) {																				\
-		FF_METHOD_CONTEXT(#name);												    				\
-		type target;																								\
-		converter::unwrap(&target, value);													\
-		Nan::ObjectWrap::Unwrap<clazz>(info.This())->prop = target;	\
-	}
+		static v8::Local<v8::Value> wrap(Type val) {
+			std::vector<const char*> mappings = TEnum::getEnumMappings();
+			return StringConverter::wrap(mappings[getValueIndex(val)]);
+		}
+
+	private:
+		static int getMappingIndex(v8::Local<v8::Value> jsVal) {
+			std::string val;
+			std::vector<const char*> mappings = TEnum::getEnumMappings();
+			if (!StringConverter::unwrapTo(&val, jsVal)) {
+				for (uint idx = 0; idx < mappings.size(); idx++) {
+					if (val.compare(mappings[idx]) == 0) {
+						return (int)idx;
+					}
+				}
+			}
+			return -1;
+		}
+
+		static int getValueIndex(Type val) {
+			std::vector<Type> enumValues = TEnum::getEnumValues();
+			for (uint idx = 0; idx < enumValues.size(); idx++) {
+				if (enumValues[idx] == val) {
+					return (int)idx;
+				}
+			}
+			return -1;
+		}
+	};
+
+	template<class TEnum>
+	class EnumWrap {
+	public:
+		typedef AbstractConverter<EnumConverterImpl<TEnum>> Converter;
+
+		static void init(Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE target) {
+			v8::Local<v8::Object> scoreTypes = Nan::New<v8::Object>();
+			for (const char* e : TEnum::getEnumMappings()) {
+				Nan::Set(scoreTypes, newString(e), newString(e));
+			}
+			Nan::Set(target, newString(TEnum::getClassName()), scoreTypes);
+		}
+	};
+}
 
 #endif

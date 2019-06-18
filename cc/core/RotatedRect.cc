@@ -7,35 +7,36 @@ NAN_MODULE_INIT(RotatedRect::Init) {
 	RotatedRect::constructor.Reset(ctor);
 	ctor->InstanceTemplate()->SetInternalFieldCount(1);
 	ctor->SetClassName(Nan::New("RotatedRect").ToLocalChecked());
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("angle"), RotatedRect::GetAngle);
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("center"), RotatedRect::GetCenter);
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("size"), RotatedRect::GetSize);
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("angle"), RotatedRect::angle_getter);
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("center"), RotatedRect::center_getter);
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("size"), RotatedRect::size_getter);
 
 	Nan::SetPrototypeMethod(ctor, "boundingRect", RotatedRect::BoundingRect);
 
-  target->Set(Nan::New("RotatedRect").ToLocalChecked(), ctor->GetFunction());
+  Nan::Set(target,Nan::New("RotatedRect").ToLocalChecked(), FF::getFunction(ctor));
 };
 
 NAN_METHOD(RotatedRect::New) {
-	FF_ASSERT_CONSTRUCT_CALL(RotatedRect);
+	FF::TryCatch tryCatch("RotatedRect::New");
+	FF_ASSERT_CONSTRUCT_CALL();
 	RotatedRect* self = new RotatedRect();
 	if (info.Length() == 0) {
-		self->rect = cv::RotatedRect();
+		self->self = cv::RotatedRect();
 	} else {
 		if (info.Length() < 3) {
-			return Nan::ThrowError("RotatedRect::New - expected arguments center, size, angle");
+			return tryCatch.throwError("expected arguments center, size, angle");
 		}
-		if (!FF_IS_INSTANCE(Point2::constructor, info[0])) {
-			return Nan::ThrowError("RotatedRect::New - expected arg0 to be an instance of Point2");
+		if (!Point2::hasInstance(info[0])) {
+			return tryCatch.throwError("expected arg0 to be an instance of Point2");
 		}
-		if (!FF_IS_INSTANCE(Size::constructor, info[1])) {
-			return Nan::ThrowError("RotatedRect::New - expected arg1 to be an instance of Size");
+		if (!Size::hasInstance(info[1])) {
+			return tryCatch.throwError("expected arg1 to be an instance of Size");
 		}
 		double angle = info[2]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
 
-		self->rect = cv::RotatedRect(
-			FF_UNWRAP_PT2_AND_GET(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
-			FF_UNWRAP_SIZE_AND_GET(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
+		self->self = cv::RotatedRect(
+			Point2::Converter::unwrapUnchecked(info[0]),
+			Size::Converter::unwrapUnchecked(info[1]),
 			angle
 		);
 	}

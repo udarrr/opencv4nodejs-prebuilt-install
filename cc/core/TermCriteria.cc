@@ -6,23 +6,30 @@ NAN_MODULE_INIT(TermCriteria::Init) {
 	v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TermCriteria::New);
 	TermCriteria::constructor.Reset(ctor);
 	ctor->InstanceTemplate()->SetInternalFieldCount(1);
-	ctor->SetClassName(FF_NEW_STRING("TermCriteria"));
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("type"), TermCriteria::GetType);
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("maxCount"), TermCriteria::GetMaxCount);
-	Nan::SetAccessor(ctor->InstanceTemplate(), FF_NEW_STRING("epsilon"), TermCriteria::GetEpsilon);
+	ctor->SetClassName(FF::newString("TermCriteria"));
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("type"), type_getter, type_setter);
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("maxCount"), maxCount_getter, maxCount_setter);
+	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("epsilon"), epsilon_getter, epsilon_setter);
 
-  target->Set(FF_NEW_STRING("TermCriteria"), ctor->GetFunction());
+  Nan::Set(target,FF::newString("TermCriteria"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(TermCriteria::New) {
-	FF_ASSERT_CONSTRUCT_CALL(TermCriteria);
-	FF_METHOD_CONTEXT("TermCriteria::New");
+	FF::TryCatch tryCatch("TermCriteria::New");
+	FF_ASSERT_CONSTRUCT_CALL();
 	TermCriteria* self = new TermCriteria();
+
 	if (info.Length() > 0) {
-		FF_ARG_INT(0, int type);
-		FF_ARG_INT(1, int maxCount);
-		FF_ARG_NUMBER(2, double epsilon);
-		self->termCriteria = cv::TermCriteria(type, maxCount, epsilon);
+		int type, maxCount;
+		double epsilon;
+		if (
+			FF::IntConverter::arg(0, &type, info) ||
+			FF::IntConverter::arg(1, &maxCount, info) ||
+			FF::DoubleConverter::arg(2, &epsilon, info)
+		) {
+			return tryCatch.reThrow();
+		}
+		self->self = cv::TermCriteria(type, maxCount, epsilon);
 	}
 	self->Wrap(info.Holder());
 	info.GetReturnValue().Set(info.Holder());

@@ -12,18 +12,9 @@
 #ifndef __FF_MAT_H__
 #define __FF_MAT_H__
 
-class Mat : public Nan::ObjectWrap {
+class Mat : public FF::ObjectWrap<Mat, cv::Mat> {
 public:
-	cv::Mat mat;
-
-  static Nan::Persistent<v8::FunctionTemplate> constructor;
-
-	void setNativeProps(cv::Mat);
-
-	cv::Mat* getNativeObjectPtr() { return &mat; }
-	cv::Mat getNativeObject() { return mat; }
-
-	typedef InstanceConverter<Mat, cv::Mat> Converter;
+	static Nan::Persistent<v8::FunctionTemplate> constructor;
 
 	static const char* getClassName() {
 		return "Mat";
@@ -31,31 +22,32 @@ public:
 
 	static NAN_MODULE_INIT(Init);
 
-	static FF_GETTER(Mat, GetRows, mat.rows);
-	static FF_GETTER(Mat, GetCols, mat.cols);
-	static FF_GETTER(Mat, GetType, mat.type());
-	static FF_GETTER(Mat, GetChannels, mat.channels());
-	static FF_GETTER(Mat, GetDims, mat.dims);
-	static FF_GETTER(Mat, GetDepth, mat.depth());
-	static FF_GETTER(Mat, GetIsEmpty, mat.empty());
+	FF_GETTER(rows, FF::IntConverter);
+	FF_GETTER(cols, FF::IntConverter);
+	FF_GETTER_CUSTOM(type, FF::IntConverter, self.type());
+	FF_GETTER_CUSTOM(channels, FF::IntConverter, self.channels());
+	FF_GETTER_CUSTOM(dims, FF::IntConverter, self.dims);
+	FF_GETTER_CUSTOM(depth, FF::IntConverter, self.depth());
+	FF_GETTER_CUSTOM(empty, FF::IntConverter, self.empty());
+
 	static NAN_GETTER(GetElemSize) {
-		info.GetReturnValue().Set((int)Converter::unwrap(info.This()).elemSize());
+		info.GetReturnValue().Set((int)Mat::unwrapSelf(info).elemSize());
 	};
 	static NAN_GETTER(GetStep) {
-		info.GetReturnValue().Set((int)Converter::unwrap(info.This()).step.operator size_t());
+		info.GetReturnValue().Set((int)Mat::unwrapSelf(info).step.operator size_t());
 	};
 	static NAN_GETTER(GetSizes) {
-		cv::Mat m = Converter::unwrap(info.This());
+		cv::Mat m = Mat::unwrapSelf(info);
 		std::vector<int> sizes;
 		for (int s = 0; s < m.dims; s++) {
 			sizes.push_back(m.size[s]);
 		}
-		info.GetReturnValue().Set(IntArrayConverter::wrap(sizes));
+		info.GetReturnValue().Set(FF::IntArrayConverter::wrap(sizes));
 	};
 
 	FF_INIT_MAT_OPERATIONS();
 	static NAN_METHOD(Dot) {
-		FF_OPERATOR_RET_SCALAR(&cv::Mat::dot, FF_APPLY_CLASS_FUNC, FF_UNWRAP_MAT_AND_GET, Mat);
+		FF_OPERATOR_RET_SCALAR(&cv::Mat::dot, FF_APPLY_CLASS_FUNC, Mat, "Dot");
 	}
 
   static NAN_METHOD(New);
@@ -69,7 +61,6 @@ public:
   static NAN_METHOD(GetDataAsArray);
   static NAN_METHOD(GetRegion);
   static NAN_METHOD(Norm);
-  static NAN_METHOD(Normalize);
   static NAN_METHOD(Row);
   static NAN_METHOD(Release);
   static NAN_METHOD(PushBack);
@@ -84,16 +75,6 @@ public:
   static NAN_METHOD(CopyToAsync);
   static NAN_METHOD(ConvertTo);
   static NAN_METHOD(ConvertToAsync);
-  static NAN_METHOD(SplitChannels);
-  static NAN_METHOD(SplitChannelsAsync);
-  static NAN_METHOD(AddWeighted);
-  static NAN_METHOD(AddWeightedAsync);
-  static NAN_METHOD(MinMaxLoc);
-  static NAN_METHOD(MinMaxLocAsync);
-  static NAN_METHOD(FindNonZero);
-  static NAN_METHOD(FindNonZeroAsync);
-  static NAN_METHOD(CountNonZero);
-  static NAN_METHOD(CountNonZeroAsync);
   static NAN_METHOD(PadToSquare);
   static NAN_METHOD(PadToSquareAsync);
   static NAN_METHOD(Dct);
@@ -104,37 +85,48 @@ public:
   static NAN_METHOD(DftAsync);
   static NAN_METHOD(Idft);
   static NAN_METHOD(IdftAsync);
+  static NAN_METHOD(Flip);
+  static NAN_METHOD(FlipAsync);
+  static NAN_METHOD(CopyMakeBorder);
+  static NAN_METHOD(CopyMakeBorderAsync);
+
+#if CV_VERSION_GREATER_EQUAL(3, 2, 0)
+  static NAN_METHOD(Rotate);
+  static NAN_METHOD(RotateAsync);
+#endif
+
+  static NAN_METHOD(AddWeighted);
+  static NAN_METHOD(AddWeightedAsync);
+  static NAN_METHOD(MinMaxLoc);
+  static NAN_METHOD(MinMaxLocAsync);
+  static NAN_METHOD(FindNonZero);
+  static NAN_METHOD(FindNonZeroAsync);
+  static NAN_METHOD(CountNonZero);
+  static NAN_METHOD(CountNonZeroAsync);
+  static NAN_METHOD(Normalize);
+  static NAN_METHOD(NormalizeAsync);
+  static NAN_METHOD(Split);
+  static NAN_METHOD(SplitAsync);
   static NAN_METHOD(MulSpectrums);
   static NAN_METHOD(MulSpectrumsAsync);
   static NAN_METHOD(Transform);
   static NAN_METHOD(TransformAsync);
   static NAN_METHOD(PerspectiveTransform);
   static NAN_METHOD(PerspectiveTransformAsync);
-  static NAN_METHOD(Flip);
-  static NAN_METHOD(FlipAsync);
   static NAN_METHOD(Sum);
   static NAN_METHOD(SumAsync);
   static NAN_METHOD(ConvertScaleAbs);
   static NAN_METHOD(ConvertScaleAbsAsync);
-  static NAN_METHOD(GoodFeaturesToTrack);
-  static NAN_METHOD(GoodFeaturesToTrackAsync);
   static NAN_METHOD(Mean);
   static NAN_METHOD(MeanAsync);
   static NAN_METHOD(MeanStdDev);
   static NAN_METHOD(MeanStdDevAsync);
-  static NAN_METHOD(CopyMakeBorder);
-  static NAN_METHOD(CopyMakeBorderAsync);
   static NAN_METHOD(Reduce);
   static NAN_METHOD(ReduceAsync);
   static NAN_METHOD(Eigen);
   static NAN_METHOD(EigenAsync);
   static NAN_METHOD(Solve);
   static NAN_METHOD(SolveAsync);
-
-#if CV_VERSION_MINOR > 1
-  static NAN_METHOD(Rotate);
-  static NAN_METHOD(RotateAsync);
-#endif
 
 };
 
