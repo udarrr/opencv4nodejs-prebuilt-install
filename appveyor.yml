@@ -23,12 +23,6 @@ environment:
 
   matrix:
     - nodejs_version: 12
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      OPENCV_VERSION: "%OPENCV4_LATEST%"
-    - nodejs_version: 12
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      OPENCV_VERSION: "%OPENCV3_LATEST%"
-    - nodejs_version: 12
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       OPENCV_VERSION: "%OPENCV4_LATEST%"
     - nodejs_version: 11
@@ -70,5 +64,5 @@ test_script:
 on_success:
   - cmd: cd c:\projects\opencv4nodejs
   - IF defined APPVEYOR_REPO_TAG_NAME (
-    npm run prebuild -- --tag-prefix "" -u %GITHUB_TOKEN%
+    npm run prebuild -- --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u %GITHUB_TOKEN%
     )

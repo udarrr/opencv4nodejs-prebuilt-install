@@ -113,7 +113,6 @@
 			"cc/xfeatures2d/SIFTDetector.cc",
 			"cc/xfeatures2d/SURFDetector.cc"
 		],
-
 		"cflags" : [
 			"-std=c++11"
 		],
@@ -124,9 +123,6 @@
 			"-fno-rtti",
 			"-fno-exceptions"
 		],
-		"ldflags" : [
-			"-Wl,-rpath,'$$ORIGIN'"
-		],
 		"xcode_settings": {
 			"OTHER_CFLAGS": [
 				"-std=c++11",
@@ -135,7 +131,6 @@
 			"GCC_ENABLE_CPP_EXCEPTIONS": "YES",
 			"MACOSX_DEPLOYMENT_TARGET": "10.9"
 		},
-
 		"conditions": [
 			[ "OS==\"win\"", {
 				"cflags": [
@@ -156,7 +151,17 @@
 	          {
 	            "link_settings": {
 	              "libraries": [
-					"-Wl,-rpath,@loader_path/../../../opencv-build/opencv/build/lib"
+					"-Wl,-rpath,@loader_path",
+	              ],
+	            }
+	          }
+	        ],
+	        ["OS==\"linux\"",
+	          {
+	            "link_settings": {
+	              "libraries": [
+					"-Wl,-rpath,'$$ORIGIN'",
+					"-Wl,-rpath,'$$ORIGIN'/.."
 	              ],
 	            }
 	          }
@@ -168,7 +173,14 @@
 				"cflags": ["--coverage"],
 				"ldflags": ["--coverage"]
 			},
-    }
-
+		}
+	},
+	{
+		"target_name": "action_before_build",
+      	"type": "none",
+      	"copies": [{
+          "files": [ "<!@(node ./lib/bundle.js)" ],
+          "destination": "<(PRODUCT_DIR)"
+        }]
 	}]
 }

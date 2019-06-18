@@ -5,4 +5,7 @@ then
 fi
 cd ../../ &&\
 npm install --unsafe-perm &&\
-npm run prebuild -- --tag-prefix "" -u $GITHUB_TOKEN;
+cd test
+npm install && npm test
+cd -
+npm run prebuild -- --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u $GITHUB_TOKEN;
