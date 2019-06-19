@@ -2,12 +2,8 @@ language: node_js
 
 sudo: required
 
-services:
-  - docker
-
 env:
   global:
-    - OPENCV4NODEJS_DISABLE_AUTOBUILD=1
     - LATEST_STABLE_NODEJS_VERSION=12
     - OPENCV3_LATEST=3.4.6
     - OPENCV4_LATEST=4.1.0
@@ -133,11 +129,7 @@ before_install:
 install: true
 
 script:
-  - if [[ $BUILD_TASK != "prebuild" && "$TRAVIS_OS_NAME" == "linux" ]]; then
-    cd ./ci/$BUILD_TASK;
-    npm run $BUILD_TASK $OPENCV_VERSION $TRAVIS_NODE_VERSION;
-    fi
-  - if [[ $BUILD_TASK != "prebuild" && "$TRAVIS_OS_NAME" == "osx" ]]; then
+  - if [[ $BUILD_TASK != "prebuild" ]]; then
     sh ./ci/test/script/run-test.sh;
     fi
   - if [[ $BUILD_TASK == "prebuild" && $TRAVIS_TAG != "" ]]; then

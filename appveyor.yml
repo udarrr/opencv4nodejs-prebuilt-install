@@ -19,7 +19,6 @@ environment:
   PYTHON_VERSION: 2.7
   PYTHON: "C:\\Python27-x64"
   # use self build
-  OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
 
   matrix:
     - nodejs_version: 12

@@ -1,8 +1,4 @@
 #!/bin/sh
-if [[ "$TRAVIS_OS_NAME" == "linux" ]];
-then
-    unset OPENCV4NODEJS_DISABLE_AUTOBUILD
-fi
 cd ../../ &&\
 npm install --unsafe-perm &&\
 cd test

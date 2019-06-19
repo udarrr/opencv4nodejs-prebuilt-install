@@ -43,7 +43,6 @@
   },
   "gypfile": true,
   "dependencies": {
-    "@nut-tree/opencv-build-darwin": "^4.1.0-beta1",
     "macro-inferno": "^0.2.3",
     "nan": "^2.14.0",
     "native-node-utils": "^0.2.7",
