@@ -39,13 +39,6 @@ environment:
       OPENCV_VERSION: "%OPENCV4_LATEST%"
 
 install:
-  - cmd: choco install OpenCV -y -version %OPENCV_VERSION%
-  - IF EXIST c:\tools\opencv* CD c:\tools\opencv*
-  - SET OPENCV_INCLUDE_DIR=%CD%\build\include
-  - SET OPENCV_LIB_DIR=%CD%\build\x64\vc14\lib
-  - SET OPENCV_BIN_DIR=%CD%\build\x64\vc14\bin
-  - SET PATH=%PATH%;%OPENCV_BIN_DIR%;
-
   - ps: Install-Product node $env:nodejs_version x64
   - node --version
   - npm install -g node-gyp
