@@ -6,7 +6,6 @@
 		],
 		"include_dirs" : [
 			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_INCLUDES)",
-			"<!@(node ./lib/includes.js)",
 			"cc",
 			"cc/core",
 			"<!(node -e \"require('nan')\")",
