@@ -2,9 +2,10 @@
 	"targets": [{
 		"target_name": "opencv4nodejs",
 		"defines": [
-			"<!@(node ./lib/defines.js)",
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_DEFINES)",
 		],
 		"include_dirs" : [
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_INCLUDES)",
 			"<!@(node ./lib/includes.js)",
 			"cc",
 			"cc/core",
@@ -12,7 +13,7 @@
 			"<!(node -e \"require('native-node-utils')\")"
 		],
 		"libraries": [
-			"<!@(node ./lib/libs.js)"
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_LIBRARIES)",
 		],
 		"sources": [
 			"cc/opencv4nodejs.cc",
@@ -41,6 +42,7 @@
 			"cc/io/VideoWriter.cc",
 			"cc/photo/photo.cc",
 			"cc/photo/photoConstants.cc",
+			"cc/photo/MatPhoto.cc",
 			"cc/video/video.cc",
 			"cc/video/BackgroundSubtractor.cc",
 			"cc/video/BackgroundSubtractorMOG2.cc",
@@ -174,7 +176,7 @@
 				"ldflags": ["--coverage"]
 			},
 		}
-	},
+    },
 	{
 		"target_name": "action_before_build",
       	"type": "none",
