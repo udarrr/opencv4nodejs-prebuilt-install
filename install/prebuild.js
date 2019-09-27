@@ -58,7 +58,7 @@ if (!uploadToken) {
   throw new Error(`Missing upload token at env ${UPLOAD_TOKEN_KEY}`)
 }
 
-const prebuildCmd = `prebuild -u ${uploadToken} --include-regex "\.(node|a|so|dylib|lib|dll).*$"`
+const prebuildCmd = `prebuild --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${uploadToken}`
 log.info('install', `Running prebuild`)
 const child = exec(prebuildCmd, {
     maxBuffer: 1024 * 1024 * 10
