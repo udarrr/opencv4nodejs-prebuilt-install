@@ -2,124 +2,89 @@ language: node_js
 
 sudo: required
 
-env:
-  global:
-    - LATEST_STABLE_NODEJS_VERSION=12
-    - OPENCV3_LATEST=3.4.6
-    - OPENCV4_LATEST=4.1.0
-
 matrix:
   include:
-    # latest OpenCV 4
     - os: linux
       node_js: 6
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: linux
       node_js: 6
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: linux
       node_js: 8
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: linux
       node_js: 8
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: linux
       node_js: 10
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: linux
       node_js: 10
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: linux
       node_js: 11
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: linux
       node_js: 11
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: linux
-      node_js: $LATEST_STABLE_NODEJS_VERSION
+      node_js: 12
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: linux
-      node_js: $LATEST_STABLE_NODEJS_VERSION
+      node_js: 12
       env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
 
-    # code coverage
-    - os: linux
-      node_js: $LATEST_STABLE_NODEJS_VERSION
-      env:
-        - OPENCV_VERSION=$OPENCV4_LATEST-contrib
-          BUILD_TASK=cover
-
-    # osx opencv@4
     - os: osx
       node_js: 6
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: osx
       node_js: 6
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: osx
       node_js: 8
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: osx
       node_js: 8
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: osx
       node_js: 10
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: osx
       node_js: 10
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: osx
       node_js: 11
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: osx
       node_js: 11
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
     - os: osx
-      node_js: $LATEST_STABLE_NODEJS_VERSION
+      node_js: 12
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=test
+        - BUILD_TASK=test
     - os: osx
-      node_js: $LATEST_STABLE_NODEJS_VERSION
+      node_js: 12
       env:
-        - OPENCV_VERSION=4
-          BUILD_TASK=prebuild
+        - BUILD_TASK=prebuild
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
