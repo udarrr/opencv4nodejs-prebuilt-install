@@ -1,35 +1,11 @@
 const opencvBuild = require(`@nut-tree/opencv-build-${process.platform}`)
-const child_process = require('child_process')
 const fs = require('fs')
 const log = require('npmlog')
+const { exec } = require("child_process");
 const { resolvePath } = require('../lib/commons')
-
-const defaultDir = '/usr/local'
-const defaultLibDir = `${defaultDir}/lib`
-const defaultIncludeDir = `${defaultDir}/include`
-const defaultIncludeDirOpenCV4 = `${defaultIncludeDir}/opencv4`
-
-function getDefaultIncludeDirs() {
-  log.info('install', 'OPENCV_INCLUDE_DIR is not set, looking for default include dir')
-  if (opencvBuild.isWin()) {
-    throw new Error('OPENCV_INCLUDE_DIR has to be defined on windows when auto build is disabled')
-  }
-  return [defaultIncludeDir, defaultIncludeDirOpenCV4]
-}
-
-function getDefaultLibDir() {
-  log.info('install', 'OPENCV_LIB_DIR is not set, looking for default lib dir')
-  if (opencvBuild.isWin()) {
-    throw new Error('OPENCV_LIB_DIR has to be defined on windows when auto build is disabled')
-  }
-  return defaultLibDir
-}
 
 opencvBuild.applyEnvsFromPackageJson()
 
-// const libDir = opencvBuild.isAutoBuildDisabled()
-//   ? (resolvePath(process.env.OPENCV_LIB_DIR) || getDefaultLibDir())
-//   : resolvePath(opencvBuild.opencvLibDir)
 const libDir = resolvePath(opencvBuild.opencvLibDir);
 
 log.info('install', 'using lib dir: ' + libDir)
@@ -52,10 +28,6 @@ libsFoundInDir.forEach(lib => log.info('install', lib.opencvModule + ' : ' + lib
 const defines = libsFoundInDir
   .map(lib => `OPENCV4NODEJS_FOUND_LIBRARY_${lib.opencvModule.toUpperCase()}`)
 
-// const explicitIncludeDir = resolvePath(process.env.OPENCV_INCLUDE_DIR)
-// const includes = opencvBuild.isAutoBuildDisabled()
-//   ? (explicitIncludeDir ? [explicitIncludeDir] : getDefaultIncludeDirs())
-//   : [resolvePath(opencvBuild.opencvInclude), resolvePath(opencvBuild.opencv4Include)]
 const includes = [resolvePath(opencvBuild.opencvInclude), resolvePath(opencvBuild.opencv4Include)]
 
 const libs = opencvBuild.isWin()
@@ -79,10 +51,16 @@ process.env['OPENCV4NODEJS_DEFINES'] = defines.join('\n')
 process.env['OPENCV4NODEJS_INCLUDES'] = includes.join('\n')
 process.env['OPENCV4NODEJS_LIBRARIES'] = libs.join('\n')
 
-const flags = process.env.BINDINGS_DEBUG ? '--jobs max --debug' : '--jobs max'
-const nodegypCmd = 'node-gyp rebuild ' + flags
-log.info('install', `spawning node gyp process: ${nodegypCmd}`)
-const child = child_process.exec(nodegypCmd, {
+const UPLOAD_TOKEN_KEY = 'GITHUB_TOKEN';
+const uploadToken = process.env[UPLOAD_TOKEN_KEY];
+
+if (!uploadToken) {
+  throw new Error(`Missing upload token at env ${UPLOAD_TOKEN_KEY}`)
+}
+
+const prebuildCmd = `prebuild -u ${uploadToken} --include-regex "\.(node|a|so|dylib|lib|dll).*$"`
+log.info('install', `Running prebuild`)
+const child = exec(prebuildCmd, {
     maxBuffer: 1024 * 1024 * 10
 }, function(err, stdout, stderr) {
   const _err = err || stderr
