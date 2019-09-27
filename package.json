@@ -1,7 +1,7 @@
 {
   "name": "opencv4nodejs-prebuilt",
-  "version": "5.0.0-beta1",
-  "description": "This is a fork of opencv4nodejs which provides pre-built binaries",
+  "version": "5.3.0-beta1",
+  "description": "Asynchronous OpenCV 3.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
     "cv",
@@ -33,26 +33,29 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "prebuild-install --verbose || (node ./install.js && node-gyp rebuild)",
+    "install": "prebuild-install || (node ./install/install_dependencies.js && node ./install/install.js)",
     "configure": "node-gyp configure",
-    "build": "node ./install.js && node-gyp configure build",
-    "rebuild": "node ./install.js && node-gyp rebuild",
+    "build": "node ./install/install_dependencies.js && node ./install/install.js",
+    "rebuild": "node ./install/install_dependencies.js && node-gyp rebuild --jobs max",
     "clean": "node-gyp clean",
-    "prebuild": "node ./install.js && prebuild",
-    "build-debug": "node ./install.js && node-gyp rebuild --debug"
+    "prebuild": "node ./install/install_dependencies.js && prebuild",
+    "build-debug": "BINDINGS_DEBUG=true node ./install/install_dependencies.js && node ./install/install.js"
   },
   "gypfile": true,
   "dependencies": {
-    "macro-inferno": "^0.2.3",
     "nan": "^2.14.0",
     "native-node-utils": "^0.2.7",
-    "prebuild-install": "^5.3.0"
+    "npmlog": "^4.1.2",
+    "prebuild-install": "^5.3.2"
   },
   "optionalDependencies": {
     "@types/node": ">6"
   },
-  "devDependencies": {
-    "prebuild": "^8.2.0"
+  "opencv4nodejs": {
+    "disableAutoBuild": 1
   },
-  "opencv": "4.1.0-beta1"
+  "opencv": "4.1.1-beta4",
+  "devDependencies": {
+    "prebuild": "^9.1.0"
+  }
 }
