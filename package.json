@@ -39,7 +39,7 @@
     "build": "node ./install/dependencies.js && node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
-    "prebuild": "node ./install/dependencies.js && node ./install/prebuild.js"
+    "prebuild": "node ./install/dependencies.js && prebuild"
   },
   "gypfile": true,
   "dependencies": {
