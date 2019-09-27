@@ -56,5 +56,5 @@ test_script:
 on_success:
   - cmd: cd c:\projects\opencv4nodejs
   - IF defined APPVEYOR_REPO_TAG_NAME (
-    npm run prebuild
+    npm run prebuild -- --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u %GITHUB_TOKEN%
     )
