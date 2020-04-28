@@ -36,6 +36,22 @@ matrix:
       node_js: 12
       env:
         - BUILD_TASK=prebuild
+    - os: linux
+      node_js: 13
+      env:
+        - BUILD_TASK=test
+    - os: linux
+      node_js: 13
+      env:
+        - BUILD_TASK=prebuild
+    - os: linux
+      node_js: 14
+      env:
+        - BUILD_TASK=test
+    - os: linux
+      node_js: 14
+      env:
+        - BUILD_TASK=prebuild
 
     - os: osx
       node_js: 8
@@ -67,6 +83,22 @@ matrix:
         - BUILD_TASK=test
     - os: osx
       node_js: 12
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: 13
+      env:
+        - BUILD_TASK=test
+    - os: osx
+      node_js: 13
+      env:
+        - BUILD_TASK=prebuild
+    - os: osx
+      node_js: 14
+      env:
+        - BUILD_TASK=test
+    - os: osx
+      node_js: 14
       env:
         - BUILD_TASK=prebuild
 

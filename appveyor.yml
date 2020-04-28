@@ -18,6 +18,10 @@ environment:
   PYTHON: "C:\\Python27-x64"
 
   matrix:
+    - nodejs_version: 14
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    - nodejs_version: 13
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     - nodejs_version: 12
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     - nodejs_version: 11
