@@ -54,7 +54,7 @@
   "opencv4nodejs": {
     "disableAutoBuild": 1
   },
-  "opencv": "4.1.1-5",
+  "opencv": "4.1.1-7",
   "devDependencies": {
     "prebuild": "^9.1.0"
   }
