@@ -2,105 +2,95 @@ language: node_js
 
 sudo: required
 
+os:
+  - linux
+  - osx
+node_js:
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+env:
+  - BUILD_TASK=test 
+  - BUILD_TASK=prebuild
+
 matrix:
   include:
     - os: linux
-      node_js: 8
+      node_js: 12
       env:
-        - BUILD_TASK=test
-    - os: linux
-      node_js: 8
-      env:
+        - TARGET=4.0.0
         - BUILD_TASK=prebuild
-    - os: linux
-      node_js: 10
-      env:
-        - BUILD_TASK=test
-    - os: linux
-      node_js: 10
-      env:
-        - BUILD_TASK=prebuild
-    - os: linux
-      node_js: 11
-      env:
-        - BUILD_TASK=test
-    - os: linux
-      node_js: 11
-      env:
-        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: linux
       node_js: 12
       env:
-        - BUILD_TASK=test
+        - TARGET=4.0.4
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: linux
       node_js: 12
       env:
+        - TARGET=5.0.0
         - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: linux
-      node_js: 13
+      node_js: 12
       env:
-        - BUILD_TASK=test
+        - TARGET=6.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: linux
-      node_js: 13
+      node_js: 12
       env:
+        - TARGET=7.0.0
         - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: linux
-      node_js: 14
+      node_js: 12
       env:
-        - BUILD_TASK=test
-    - os: linux
-      node_js: 14
-      env:
+        - TARGET=8.0.0
         - BUILD_TASK=prebuild
-
-    - os: osx
-      node_js: 8
-      env:
-        - BUILD_TASK=test
-    - os: osx
-      node_js: 8
-      env:
-        - BUILD_TASK=prebuild
-    - os: osx
-      node_js: 10
-      env:
-        - BUILD_TASK=test
-    - os: osx
-      node_js: 10
-      env:
-        - BUILD_TASK=prebuild
-    - os: osx
-      node_js: 11
-      env:
-        - BUILD_TASK=test
-    - os: osx
-      node_js: 11
-      env:
-        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: osx
       node_js: 12
       env:
-        - BUILD_TASK=test
+        - TARGET=4.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: osx
       node_js: 12
       env:
+        - TARGET=4.0.4
         - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: osx
-      node_js: 13
+      node_js: 12
       env:
-        - BUILD_TASK=test
-    - os: osx
-      node_js: 13
-      env:
+        - TARGET=5.0.0
         - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: osx
-      node_js: 14
+      node_js: 12
       env:
-        - BUILD_TASK=test
-    - os: osx
-      node_js: 14
-      env:
+        - TARGET=6.0.0
         - BUILD_TASK=prebuild
+        - RUNTIME=electron
+    - os: osx
+      node_js: 12
+      env:
+        - TARGET=7.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
+    - os: osx
+      node_js: 12
+      env:
+        - TARGET=8.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -115,11 +105,5 @@ script:
     fi
   - if [[ $BUILD_TASK == "prebuild" && $TRAVIS_TAG != "" ]]; then
     cd ./ci/$BUILD_TASK;
-    npm run $BUILD_TASK $OPENCV_VERSION $TRAVIS_NODE_VERSION;
-    fi
-
-after_success:
-  - if [ $BUILD_TASK = 'cover' ]; then
-    npm install;
-    npm run codecov -- -t $CODECOV_TOKEN;
+    npm run $BUILD_TASK $TARGET $RUNTIME;
     fi

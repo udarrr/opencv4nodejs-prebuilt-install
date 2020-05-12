@@ -10,7 +10,7 @@ init:
   - git config --global core.autocrlf true
 
 # cache:
- # - c:\tools\opencv
+# - c:\tools\opencv
 
 # what combinations to test
 environment:
@@ -20,16 +20,57 @@ environment:
   matrix:
     - nodejs_version: 14
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "14.0.0"
+      RUNTIME: "node"
     - nodejs_version: 13
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "13.0.0"
+      RUNTIME: "node"
     - nodejs_version: 12
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "12.0.0"
+      RUNTIME: "node"
     - nodejs_version: 11
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "11.0.0"
+      RUNTIME: "node"
     - nodejs_version: 10
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "10.0.0"
+      RUNTIME: "node"
+    - nodejs_version: 9
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "9.0.0"
+      RUNTIME: "node"
     - nodejs_version: 8
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "8.0.0"
+      RUNTIME: "node"
+
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "4.0.0"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "4.0.4"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "5.0.0"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "6.0.0"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "7.0.0"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "8.0.0"
+      RUNTIME: "electron"
 
 install:
   # - cmd: choco install OpenCV -y -version %OPENCV_VERSION%
@@ -45,20 +86,20 @@ build: off
 test_script:
   - node --version
   - if "%BUILD_TASK%" == "ENVS" (
-      cd c:\projects\opencv4nodejs\ci\envs &&
-      npm install &&
-      npm test
+    cd c:\projects\opencv4nodejs\ci\envs &&
+    npm install &&
+    npm test
     ) else (
-      cd c:\projects\opencv4nodejs &&
-      npm install &&
-      cd c:\projects\opencv4nodejs\test &&
-      npm install &&
-      npm run test-appveyor &&
-      npm run test-externalMemTracking
+    cd c:\projects\opencv4nodejs &&
+    npm install &&
+    cd c:\projects\opencv4nodejs\test &&
+    npm install &&
+    npm run test-appveyor &&
+    npm run test-externalMemTracking
     )
 
 on_success:
   - cmd: cd c:\projects\opencv4nodejs
   - IF defined APPVEYOR_REPO_TAG_NAME (
-    npm run prebuild -- --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u %GITHUB_TOKEN%
+    npm run prebuild -- -t %TARGET% -r %RUNTIME% --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u %GITHUB_TOKEN%
     )
