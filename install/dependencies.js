@@ -14,17 +14,19 @@ const packages = {
     ]
 }
 
-if (!isX64) {
-    console.log("Unsupported platform, only x64 is supported.");
-    process.exit(-1);
+if (!process.env["OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES"]) {
+    if (!isX64) {
+        console.log("Unsupported platform, only x64 is supported.");
+        process.exit(-1);
+    }
+
+    const op = process.platform;
+
+    console.log(`Installing prebuilt OpenCV v${process.env.npm_package_opencv} for plattform ${op}`);
+    install(`@nut-tree/opencv-build-${op}@${process.env.npm_package_opencv}`);
+    packages[op].forEach(pkg => {
+        console.log(`Installing additional runtime dependency '${pkg}'`);
+        install(pkg);
+    });
+    console.log(`Done.`);
 }
-
-const op = process.platform;
-
-console.log(`Installing prebuilt OpenCV v${process.env.npm_package_opencv} for plattform ${op}`);
-install(`@nut-tree/opencv-build-${op}@${process.env.npm_package_opencv}`);
-packages[op].forEach(pkg => {
-    console.log(`Installing additional runtime dependency '${pkg}'`);
-    install(pkg);
-});
-console.log(`Done.`);
