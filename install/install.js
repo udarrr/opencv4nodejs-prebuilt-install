@@ -1,5 +1,6 @@
 const opencvBuild = require(`@nut-tree/opencv-build-${process.platform}`)
 const child_process = require('child_process')
+const { basename } = require("path");
 const fs = require('fs')
 const log = require('npmlog')
 const { resolvePath } = require('../lib/commons')
@@ -58,11 +59,23 @@ const defines = libsFoundInDir
 //   : [resolvePath(opencvBuild.opencvInclude), resolvePath(opencvBuild.opencv4Include)]
 const includes = [resolvePath(opencvBuild.opencvInclude), resolvePath(opencvBuild.opencv4Include)]
 
+// linkLib produces linker flags for GNU ld and BSD ld
+// It generates linker flags based on the libPath, which make dealing with version numbers in lib names easier
+// On Linux, it passes the full path via -l:/path/to/lib which links against the given file
+// On macOS it strips the *.dylib suffix and the lib prefix and passes the result to via -l
+// This results in e.g. -lopencv_world.4.1
+const linkLib = (lib) => {
+  if (opencvBuild.isOSX()) {
+    return `-l${basename(lib.libPath, ".dylib").replace("lib", "")}`;
+  } else {
+    return `-l:${basename(lib.libPath)}`;
+  }
+}
 const libs = opencvBuild.isWin()
   ? libsFoundInDir.map(lib => resolvePath(lib.libPath))
   // dynamically link libs if not on windows
   : ['-L' + libDir]
-      .concat(libsFoundInDir.map(lib => '-lopencv_' + lib.opencvModule))
+      .concat(libsFoundInDir.map(lib => linkLib(lib)))
       .concat('-Wl,-rpath,' + libDir)
 
 console.log()
