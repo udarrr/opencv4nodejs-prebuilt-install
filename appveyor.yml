@@ -63,6 +63,14 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       TARGET: "8.0.0"
       RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "9.0.0"
+      RUNTIME: "electron"
+    - nodejs_version: 12
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TARGET: "10.0.0"
+      RUNTIME: "electron"
 
 install:
   # - cmd: choco install OpenCV -y -version %OPENCV_VERSION%
