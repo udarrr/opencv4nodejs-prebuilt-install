@@ -53,6 +53,18 @@ matrix:
         - TARGET=8.0.0
         - BUILD_TASK=prebuild
         - RUNTIME=electron
+    - os: linux
+      node_js: 12
+      env:
+        - TARGET=9.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
+    - os: linux
+      node_js: 12
+      env:
+        - TARGET=10.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
     - os: osx
       node_js: 12
       env:
@@ -87,6 +99,18 @@ matrix:
       node_js: 12
       env:
         - TARGET=8.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
+    - os: osx
+      node_js: 12
+      env:
+        - TARGET=9.0.0
+        - BUILD_TASK=prebuild
+        - RUNTIME=electron
+    - os: osx
+      node_js: 12
+      env:
+        - TARGET=10.0.0
         - BUILD_TASK=prebuild
         - RUNTIME=electron
 
