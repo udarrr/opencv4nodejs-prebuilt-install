@@ -43,10 +43,10 @@
   },
   "gypfile": true,
   "dependencies": {
-    "nan": "^2.14.0",
+    "nan": "^2.14.1",
     "native-node-utils": "^0.2.7",
     "npmlog": "^4.1.2",
-    "prebuild-install": "^5.3.3"
+    "prebuild-install": "^5.3.5"
   },
   "optionalDependencies": {
     "@types/node": ">6"
@@ -56,6 +56,6 @@
   },
   "opencv": "4.1.1-7",
   "devDependencies": {
-    "prebuild": "^9.1.0"
+    "prebuild": "^10.0.1"
   }
 }
