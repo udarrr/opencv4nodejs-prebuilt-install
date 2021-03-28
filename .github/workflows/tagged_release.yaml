@@ -1,0 +1,47 @@
+name: Create tagged release
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  prebuild-node:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node: [ 10, 12, 14]
+        task: [ prebuild ]
+        runtime: [ node ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Install
+        run: npm install --unsafe-perm
+      - name: Publish prebuild
+        run: npm run prebuild -- -t ${{matrix.node}} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
+
+  prebuild-electron:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node: [ 14]
+        task: [ prebuild ]
+        runtime: [ electron ]
+        target: [ 8.0.0 , 9.0.0 , 10.0.0 , 11.0.0 , 12.0.0  ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Install
+        run: npm install --unsafe-perm
+      - name: Publish prebuild
+        run: npm run prebuild -- -t ${{matrix.target} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
