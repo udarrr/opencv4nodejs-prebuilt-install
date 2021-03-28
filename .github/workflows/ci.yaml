@@ -23,4 +23,13 @@ jobs:
         with:
           node-version: ${{matrix.node}}
       - name: Run tests
-        run: ./ci/test/script/run-test.sh;
+        env:
+          OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+        run: |
+          echo installing
+          npm install --unsafe-perm
+          echo running tests
+          cd ./test
+          npm install --unsafe-perm
+          npm test
+          npm run test-externalMemTracking
