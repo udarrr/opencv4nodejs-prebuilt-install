@@ -44,4 +44,4 @@ jobs:
       - name: Install
         run: npm install --unsafe-perm
       - name: Publish prebuild
-        run: npm run prebuild -- -t ${{matrix.target} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
