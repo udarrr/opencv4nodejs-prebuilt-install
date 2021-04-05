@@ -130,7 +130,7 @@
 				"-stdlib=libc++"
 			],
 			"GCC_ENABLE_CPP_EXCEPTIONS": "YES",
-			"MACOSX_DEPLOYMENT_TARGET": "10.9"
+			"MACOSX_DEPLOYMENT_TARGET": "10.13"
 		},
 		"conditions": [
 			[ "OS==\"win\"", {
