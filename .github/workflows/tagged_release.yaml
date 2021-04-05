@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: ${{matrix.node}}
       - name: Install
-        run: npm install --unsafe-perm
+        run: npm ci --unsafe-perm
       - name: Publish prebuild
         shell: bash
         run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +44,24 @@ jobs:
         with:
           node-version: ${{matrix.node}}
       - name: Install
-        run: npm install --unsafe-perm
+        run: npm ci --unsafe-perm
       - name: Publish prebuild
         shell: bash
         run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs:
+      - prebuild-node
+      - prebuild-electron
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Publish tagged release
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
