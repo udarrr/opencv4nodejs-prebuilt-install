@@ -1,7 +1,7 @@
 {
   "name": "opencv4nodejs-prebuilt",
   "version": "5.3.1",
-  "description": "Asynchronous OpenCV 3.x nodejs bindings with JavaScript and TypeScript API.",
+  "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
     "cv",
@@ -43,11 +43,10 @@
   },
   "gypfile": true,
   "dependencies": {
-    "@nut-tree/opencv-build-darwin": "^4.1.1-7",
-    "nan": "^2.14.1",
+    "nan": "^2.14.2",
     "native-node-utils": "^0.2.7",
     "npmlog": "^4.1.2",
-    "prebuild-install": "^6.0.1"
+    "prebuild-install": "^6.1.1"
   },
   "optionalDependencies": {
     "@types/node": ">6"
@@ -55,7 +54,9 @@
   "opencv4nodejs": {
     "disableAutoBuild": 1
   },
-  "opencv": "4.1.1-7",
+  "config": {
+    "opencv": "4.1.1-7"
+  },
   "devDependencies": {
     "prebuild": "^10.0.1"
   }
