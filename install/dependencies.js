@@ -2,7 +2,7 @@ const { execSync } = require("child_process");
 const isX64 = process.arch === "x64";
 
 const install = (pkg) => {
-    execSync(`npm install ${pkg}`);
+    execSync(`npm install --no-save ${pkg}`);
 }
 
 const packages = {
@@ -21,9 +21,18 @@ if (!process.env["OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES"]) {
     }
 
     const op = process.platform;
+    let openCvVersion =  process.env.npm_package_opencv;
 
-    console.log(`Installing prebuilt OpenCV v${process.env.npm_package_opencv} for plattform ${op}`);
-    install(`@nut-tree/opencv-build-${op}@${process.env.npm_package_opencv}`);
+    if (!openCvVersion) {
+        // npm 7 no longer sets fields from the package.json in process.env so lookup the package.json
+        // file we're running from. The environment variables are different when running locally vs
+        // as a dependency
+        const package = require(process.env.npm_package_from || process.env.npm_package_json);
+        openCvVersion = package.opencv;
+    }
+
+    console.log(`Installing prebuilt OpenCV v${openCvVersion} for platform ${op}`);
+    install(`@nut-tree/opencv-build-${op}@${openCvVersion}`);
     packages[op].forEach(pkg => {
         console.log(`Installing additional runtime dependency '${pkg}'`);
         install(pkg);
