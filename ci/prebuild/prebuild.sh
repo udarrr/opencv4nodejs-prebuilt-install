@@ -12,6 +12,6 @@ echo "Prebuild runtime: ${RUNTIME}"
 cd ../../ &&\
 npm install --unsafe-perm &&\
 cd test
-npm install && npm test
+npm install && OPENCV4NODEJS_DISABLE_AUTOBUILD=1 npm test
 cd -
 npm run prebuild -- -t $TARGET -r $RUNTIME --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u $GITHUB_TOKEN;
