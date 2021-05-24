@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -46,7 +46,7 @@
     "nan": "^2.14.2",
     "native-node-utils": "^0.2.7",
     "npmlog": "^4.1.2",
-    "prebuild-install": "^6.1.1"
+    "prebuild-install": "^6.1.2"
   },
   "optionalDependencies": {
     "@types/node": ">6"
