@@ -12,7 +12,7 @@ jobs:
         node: [ 14]
         task: [ prebuild ]
         runtime: [ node ]
-        target: [ "12.0.0", "14.0.0", "15.0.0" ]
+        target: [ "12.0.0", "14.0.0", "15.0.0", "16.0.0"]
     runs-on: ${{matrix.os}}
     steps:
       - name: Set up Git repository
