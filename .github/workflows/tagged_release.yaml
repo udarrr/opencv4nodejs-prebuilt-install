@@ -21,8 +21,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Install node-gyp
+      - name: Install global node-gyp on Linux
+        if: ${{matrix.os == 'ubuntu-latest'}}
         run: sudo npm i -g node-gyp
+      - name: Install global node-gyp on non Linux
+        if: ${{matrix.os != 'ubuntu-latest'}}
+        run: npm i -g node-gyp
       - name: Install
         run: npm ci --unsafe-perm
       - name: Publish prebuild
@@ -45,8 +49,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Install node-gyp
+      - name: Install global node-gyp on Linux
+        if: ${{matrix.os == 'ubuntu-latest'}}
         run: sudo npm i -g node-gyp
+      - name: Install global node-gyp on non Linux
+        if: ${{matrix.os != 'ubuntu-latest'}}
+        run: npm i -g node-gyp
       - name: Install
         run: npm ci --unsafe-perm
       - name: Publish prebuild
