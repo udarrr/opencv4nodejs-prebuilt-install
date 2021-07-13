@@ -22,12 +22,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Install global node-gyp on Linux
-        if: ${{matrix.os == 'ubuntu-latest'}}
-        run: sudo npm i -g node-gyp
-      - name: Install global node-gyp on non Linux
-        if: ${{matrix.os != 'ubuntu-latest'}}
-        run: npm i -g node-gyp
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'winows-latest'}}
+        run: node-gyp configure --msvs_version=2019
       - name: Run tests
         env:
           OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
