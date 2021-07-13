@@ -8,7 +8,7 @@ jobs:
   prebuild-node:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, windows-2016, macos-latest ]
         node: [ 14]
         task: [ prebuild ]
         runtime: [ node ]
@@ -21,12 +21,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Install global node-gyp on Linux
-        if: ${{matrix.os == 'ubuntu-latest'}}
-        run: sudo npm i -g node-gyp
-      - name: Install global node-gyp on non Linux
-        if: ${{matrix.os != 'ubuntu-latest'}}
-        run: npm i -g node-gyp
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-2016'}}
+        run: npm config set msvs_version 2017
       - name: Install
         run: npm ci --unsafe-perm
       - name: Publish prebuild
@@ -36,11 +33,11 @@ jobs:
   prebuild-electron:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, windows-2016, macos-latest ]
         node: [ 14 ]
         task: [ prebuild ]
         runtime: [ electron ]
-        target: [ "8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0" ]
+        target: [ "8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0" ]
     runs-on: ${{matrix.os}}
     steps:
       - name: Set up Git repository
@@ -49,12 +46,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Install global node-gyp on Linux
-        if: ${{matrix.os == 'ubuntu-latest'}}
-        run: sudo npm i -g node-gyp
-      - name: Install global node-gyp on non Linux
-        if: ${{matrix.os != 'ubuntu-latest'}}
-        run: npm i -g node-gyp
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-2016'}}
+        run: npm config set msvs_version 2017
       - name: Install
         run: npm ci --unsafe-perm
       - name: Publish prebuild
