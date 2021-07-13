@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{matrix.node}}
       - name: Configure msvs version on Windows
-        if: ${{matrix.os == 'winows-latest'}}
+        if: ${{matrix.os == 'windows-latest'}}
         run: node-gyp configure --msvs_version=2019
       - name: Run tests
         env:
