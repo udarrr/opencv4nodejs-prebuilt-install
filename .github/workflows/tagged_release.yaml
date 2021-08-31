@@ -37,7 +37,7 @@ jobs:
         node: [ 14 ]
         task: [ prebuild ]
         runtime: [ electron ]
-        target: [ "8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0" ]
+        target: [ "8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0", "14.0.0" ]
     runs-on: ${{matrix.os}}
     steps:
       - name: Set up Git repository
