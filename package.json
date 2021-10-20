@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt",
-  "version": "5.3.4",
+  "version": "5.3.5",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -18,8 +18,8 @@
   ],
   "author": {
     "name": "Simon Hofmann",
-    "email": "dev@simon-hofmann.org",
-    "url": "https://simon-hofmann.org"
+    "email": "kontak@s1h.org",
+    "url": "https://s1h.org"
   },
   "license": "MIT",
   "repository": {
@@ -45,7 +45,7 @@
   "dependencies": {
     "nan": "^2.15.0",
     "native-node-utils": "^0.2.7",
-    "npmlog": "^4.1.2",
+    "npmlog": "^5.0.1",
     "prebuild-install": "^6.1.4"
   },
   "optionalDependencies": {
@@ -58,6 +58,6 @@
     "opencv": "4.1.1-7"
   },
   "devDependencies": {
-    "prebuild": "^10.0.1"
+    "prebuild": "^11.0.0"
   }
 }
