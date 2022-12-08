@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt",
-  "version": "4.1.112",
+  "version": "4.1.117",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -17,7 +17,8 @@
     "typescript"
   ],
   "files": [
-    "lib"
+    "lib",
+    "index.js"
   ],
   "author": {
     "name": "Simon Hofmann",
@@ -30,24 +31,24 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nut-tree/opencv4nodejs"
+    "url": "git+https://github.com/udarrr/opencv4nodejs-prebuilt"
   },
   "bugs": {
-    "url": "https://github.com/nut-tree/opencv4nodejs/issues"
+    "url": "https://github.com/udarrr/opencv4nodejs-prebuilt/issues"
   },
-  "homepage": "https://github.com/nut-tree/opencv4nodejs#readme",
+  "homepage": "https://github.com/udarrr/opencv4nodejs-prebuilt/#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "prebuild-install || exit 0",
+    "install": "prebuild-install || node ./index.js || exit 0 ",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
     "build": "node ./install/dependencies.js && node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
     "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
-    "cleanBuild": "rimraf dist",
-    "compile": "npm run clean && tsc -p .",
+    "prepack": "clean-package --remove scripts",
+    "postpack": "clean-package restore",
     "pack": "npm pack",
     "publish": "npm publish --tag latest --access=public",
     "prepublishOnly": "npm run compile"
@@ -63,13 +64,14 @@
     "prebuild": "^11.0.4"
   },
   "optionalDependencies": {
-    "@types/node": ">6"
+    "@types/node": ">12"
   },
   "opencv4nodejs": {
     "disableAutoBuild": 1
   },
   "config": {
-    "opencv": "4.1.1-7"
+    "opencv": "4.1.1-7",
+    "ci": true
   },
   "engines": {
     "node": "^12 || ^18"
