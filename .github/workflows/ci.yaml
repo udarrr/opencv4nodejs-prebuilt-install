@@ -7,14 +7,23 @@ on:
   pull_request:
 
 jobs:
-  test:
+  prebuild-node:
+    name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-2016, macos-latest ]
-        node: [ "12.0.0", "14.0.0", "15.0.0", "16.0.0", "17.0.0" ]
-        task: [ test ]
+        os:
+          - name: Ubuntu
+            version: latest
+          - name: macOS
+            version: latest
+          - name: Windows
+            version: 2019
+        node: ['12','14','16','17','18']
+        arch: [x64]
 
-    runs-on: ${{matrix.os}}
+    runs-on: ${{matrix.os.name}}
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
@@ -22,9 +31,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node}}
-      - name: Configure msvs version on Windows
-        if: ${{matrix.os == 'windows-2016'}}
-        run: npm config set msvs_version 2017
       - name: Run tests
         env:
           OPENCV4NODEJS_DISABLE_AUTOBUILD: 1

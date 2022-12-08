@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt",
-  "version": "5.3.5",
+  "version": "4.1.112",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -16,11 +16,17 @@
     "async",
     "typescript"
   ],
+  "files": [
+    "lib"
+  ],
   "author": {
     "name": "Simon Hofmann",
     "email": "kontak@s1h.org",
     "url": "https://s1h.org"
   },
+  "contributors": [
+    "Siarhei Kliushnikau <sergey.klyshnikov2@gmail.com>"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -33,20 +39,28 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "prebuild-install || (node ./install/dependencies.js && node ./install/install.js)",
+    "install": "prebuild-install || exit 0",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
     "build": "node ./install/dependencies.js && node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
-    "prebuild": "node ./install/dependencies.js && prebuild"
+    "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$",
+    "cleanBuild": "rimraf dist",
+    "compile": "npm run clean && tsc -p .",
+    "pack": "npm pack",
+    "publish": "npm publish --tag latest --access=public",
+    "prepublishOnly": "npm run compile"
   },
-  "gypfile": true,
+  "gypfile": false,
   "dependencies": {
-    "nan": "^2.15.0",
+    "nan": "^2.17.0",
     "native-node-utils": "^0.2.7",
-    "npmlog": "^5.0.1",
-    "prebuild-install": "^6.1.4"
+    "npmlog": "^7.0.1",
+    "prebuild-install": "^7.1.1"
+  },
+  "devDependencies": {
+    "prebuild": "^11.0.4"
   },
   "optionalDependencies": {
     "@types/node": ">6"
@@ -57,7 +71,7 @@
   "config": {
     "opencv": "4.1.1-7"
   },
-  "devDependencies": {
-    "prebuild": "^11.0.0"
+  "engines": {
+    "node": "^12 || ^18"
   }
 }
