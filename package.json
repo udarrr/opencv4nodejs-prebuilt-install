@@ -31,12 +31,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/udarrr/opencv4nodejs-prebuilt"
+    "url": "https://github.com/udarrr/opencv4nodejs-prebuilt-install.git"
   },
   "bugs": {
-    "url": "https://github.com/udarrr/opencv4nodejs-prebuilt/issues"
+    "url": "https://github.com/udarrr/opencv4nodejs-prebuilt-install/issues"
   },
-  "homepage": "https://github.com/udarrr/opencv4nodejs-prebuilt/#readme",
+  "homepage": "https://github.com/udarrr/opencv4nodejs-prebuilt-install/#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
