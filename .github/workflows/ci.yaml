@@ -1,44 +1,43 @@
-name: Run CI
-on:
-  push:
-    branches-ignore:
-      - develop
-      - release/**
-  pull_request:
+# name: Run CI
+# on:
+#   push:
+#     branches-ignore:
+#       - develop
+#       - release/**
+#   pull_request:
 
-jobs:
-  prebuild-node:
-    name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
-    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+# jobs:
+#   prebuild-node:
+#     name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
+#     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
-    strategy:
-      matrix:
-        os:
-          - name: Ubuntu
-            version: latest
-          - name: macOS
-            version: latest
-          - name: Windows
-            version: 2019
-        node: ['12','14','16','17','18']
-        arch: [x64]
+#     strategy:
+#       matrix:
+#         os:
+#           - name: Ubuntu
+#             version: latest
+#           - name: macOS
+#             version: latest
+#           - name: Windows
+#             version: 2019
+#         node: ['12','14','16','17','18']
+#         arch: [x64]
 
-    runs-on: ${{matrix.os.name}}
-    steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v2
-      - name: Set up node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{matrix.node}}
-      - name: Run tests
-        env:
-          OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
-        run: |
-          echo installing
-          npm install --unsafe-perm
-          echo running tests
-          cd ./test
-          npm install --unsafe-perm
-          npm test
-          npm run test-externalMemTracking
+#     steps:
+#       - name: Set up Git repository
+#         uses: actions/checkout@v2
+#       - name: Set up node
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: ${{matrix.node}}
+#       - name: Run tests
+#         env:
+#           OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+#         run: |
+#           echo installing
+#           npm install --unsafe-perm
+#           echo running tests
+#           cd ./test
+#           npm install --unsafe-perm
+#           npm test
+#           npm run test-externalMemTracking
