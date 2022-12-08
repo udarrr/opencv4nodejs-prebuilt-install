@@ -45,7 +45,7 @@
     "build": "node ./install/dependencies.js && node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
-    "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$",
+    "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
     "cleanBuild": "rimraf dist",
     "compile": "npm run clean && tsc -p .",
     "pack": "npm pack",
