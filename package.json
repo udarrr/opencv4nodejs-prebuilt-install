@@ -1,6 +1,6 @@
 {
-  "name": "opencv4nodejs-prebuilt",
-  "version": "4.1.119",
+  "name": "opencv4nodejs-prebuilt-install",
+  "version": "4.1.121",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -50,8 +50,9 @@
     "prepack": "clean-package --remove scripts",
     "postpack": "clean-package restore",
     "pack": "npm pack",
-    "publish": "npm publish --tag latest --access=public",
-    "prepublishOnly": "npm run compile"
+    "compile": "",
+    "prepublishOnly": "npm run compile",
+    "publish": "npm publish --tag latest --access=public"
   },
   "gypfile": false,
   "dependencies": {
