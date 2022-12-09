@@ -39,11 +39,38 @@
   "homepage": "https://github.com/udarrr/opencv4nodejs-prebuilt-install/#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
-  "scripts": {
+  "scripts_publish": {
     "install": "prebuild-install || exit 0"
   },
+  "scripts": {
+    "install": "prebuild-install || exit 0",
+    "clean": "node-gyp clean",
+    "configure": "node-gyp configure",
+    "build": "node ./install/dependencies.js && node-gyp build --jobs max",
+    "build-debug": "BINDINGS_DEBUG=true npm run build",
+    "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
+    "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
+    "prepack": "clean-package --remove scripts overrides devDependencies gypfile",
+    "postpack": "clean-package restore",
+    "pack": "npm pack",
+    "compile": "",
+    "prepublishOnly": "npm run compile",
+    "publish": "npm publish --tag latest --access=public"
+  },
+  "overrides": {
+    "prebuild": {
+      "node-gyp": "^9.3.0"
+    }
+  },
+  "gypfile": false,
   "dependencies": {
     "prebuild-install": "^7.1.1"
+  },
+  "devDependencies": {
+    "prebuild": "^11.0.4",
+    "nan": "^2.17.0",
+    "native-node-utils": "^0.2.7",
+    "npmlog": "^7.0.1"
   },
   "optionalDependencies": {
     "@types/node": ">12"
