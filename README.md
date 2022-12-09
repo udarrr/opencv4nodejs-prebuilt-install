@@ -1,4 +1,11 @@
-opencv4nodejs-prebuilt
-=============
+# opencv4nodejs-prebuilt-install
 
-**opencv4nodejs-prebuilt ships opinionated, pre-compiled bindings for OpenCV**
+### Simple installation Opencv 4.1.1 for node pre-compiled bindings
+
+Cross-platform!
+
+#### Supports
+
+- Windows, Linux , MacOS
+- node 12,13,14,15,16,17,18,19
+- arh x64
