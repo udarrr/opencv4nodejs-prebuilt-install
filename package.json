@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.130",
+  "version": "4.1.131",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -50,7 +50,7 @@
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
     "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
-    "prepack": "clean-package --remove scripts overrides devDependencies gypfile",
+    "prepack": "clean-package --remove scripts overrides devDependencies gypfile opencv4nodejs config optionalDependencies",
     "postpack": "clean-package restore",
     "pack": "npm pack",
     "compile": "",
