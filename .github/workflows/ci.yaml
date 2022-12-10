@@ -1,4 +1,4 @@
-name: Run CI
+name: Tests
 on:
   push:
     tags:
@@ -18,7 +18,7 @@ jobs:
             version: latest
           - name: Windows
             version: 2019
-        node: ['14']
+        node: ['12','13','14','15','16','17','18','19']
         arch: [x64]
 
     steps:
