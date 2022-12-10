@@ -55,7 +55,7 @@
     "pack": "npm pack",
     "compile": "",
     "prepublishOnly": "npm run compile",
-    "publish": "npm publish --tag latest --access=public"
+    "publish_package": "npm publish --tag latest --access=public"
   },
   "overrides": {
     "prebuild": {

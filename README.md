@@ -1,5 +1,9 @@
 # opencv4nodejs-prebuilt-install
 
+![Tested](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Tests/badge.svg)
+![Released](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Create%20tagged%20release/badge.svg)
+![Supported node LTS versions](https://img.shields.io/badge/node@arch64-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019-green)
+
 ### Simple installation Opencv 4.1.1 for node pre-compiled bindings
 
 Cross-platform!

@@ -18,7 +18,7 @@ jobs:
             version: latest
           - name: Windows
             version: 2019
-        node: ['12','14','16','17','18']
+        node: ['14']
         arch: [x64]
 
     steps:
@@ -33,9 +33,10 @@ jobs:
           OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
         run: |
           echo installing
-          npm install --unsafe-perm
+          npm ci --unsafe-perm
+          npm run install
           echo running tests
           cd ./test
-          npm install --unsafe-perm
+          npm ci --unsafe-perm
           npm test
           npm run test-externalMemTracking
