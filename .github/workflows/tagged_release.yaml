@@ -56,7 +56,7 @@ jobs:
 
   deploy:
     needs:
-      - test
+      - prebuild-node
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
