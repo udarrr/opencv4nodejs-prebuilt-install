@@ -50,8 +50,6 @@
     "prepack": "clean-package --remove scripts overrides devDependencies gypfile opencv4nodejs config optionalDependencies && node ./install/prepublish.js",
     "postpack": "clean-package restore",
     "pack": "npm pack",
-    "compile": "",
-    "prepublishOnly": "npm run compile",
     "publish_package": "npm publish --tag latest --access=public"
   },
   "overrides": {
@@ -69,9 +67,6 @@
     "native-node-utils": "^0.2.7",
     "npmlog": "^7.0.1"
   },
-  "optionalDependencies": {
-    "@types/node": ">12"
-  },
   "opencv4nodejs": {
     "disableAutoBuild": 1
   },
@@ -80,5 +75,13 @@
   },
   "engines": {
     "node": ">=12.0.0 <20.0.0"
-  }
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ]
 }
