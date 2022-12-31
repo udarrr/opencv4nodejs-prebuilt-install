@@ -115,7 +115,7 @@
                     "cc/xfeatures2d/SURFDetector.cc"
                 ],
                 "cflags": [
-                    "-std=c++17"
+                    "-std=c++11"
                 ],
                 "cflags!": [
                     "-fno-exceptions"
@@ -182,5 +182,8 @@
     }],
     'variables': {
         'openssl_fips': '',
-    }
+    },
+	'xcode_settings': {
+    'CLANG_CXX_LANGUAGE_STANDARD': 'c++17'
+}
 }
