@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.138",
+  "version": "4.1.139",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -54,8 +54,9 @@
     "publish_package": "npm publish --tag latest --access=public"
   },
   "overrides": {
+    "node-gyp": "^9.3.1",
     "prebuild": {
-      "node-gyp": "^9.3.0"
+      "node-gyp": "^9.3.1"
     }
   },
   "gypfile": false,
@@ -63,10 +64,10 @@
     "prebuild-install": "^7.1.1"
   },
   "devDependencies": {
-    "prebuild": "^11.0.4",
     "nan": "^2.17.0",
     "native-node-utils": "^0.2.7",
-    "npmlog": "^7.0.1"
+    "npmlog": "^7.0.1",
+    "prebuild": "^11.0.4"
   },
   "opencv4nodejs": {
     "disableAutoBuild": 1
