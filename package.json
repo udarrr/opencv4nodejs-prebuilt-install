@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.145",
+  "version": "4.1.146",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
