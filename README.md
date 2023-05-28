@@ -2,7 +2,7 @@
 
 ![Tested](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Tests/badge.svg)
 ![Released](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Create%20tagged%20release/badge.svg)
-![Supported node versions](https://img.shields.io/badge/node-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019C%2020-green)
+![Supported node versions](https://img.shields.io/badge/node-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019%2C%2020-green)
 ![Supported electron versions](https://img.shields.io/badge/electron-8%2C%209%2C%2010%2C%2011%2C%2012%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019-green)
 
 ### Simple installation Opencv 4.1.1 for node with pre-compiled bindings
@@ -12,7 +12,7 @@ Cross-platform!
 #### Supports
 
 - Windows, Linux , MacOS
-- node 12,13,14,15,16,17,18,19
+- node 12,13,14,15,16,17,18,19,20
 - arh x64
 
 ## How to install
