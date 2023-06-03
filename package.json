@@ -43,15 +43,16 @@
     "install": "prebuild-install || exit 0",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "build": "node ./install/dependencies.js && node-gyp build --jobs max",
+    "build": "node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
-    "rebuild": "node ./install/dependencies.js && node-gyp rebuild --jobs max",
-    "prebuild": "node ./install/dependencies.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
+    "rebuild": "node-gyp rebuild --jobs max",
+    "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
     "prepack": "clean-package --remove scripts overrides devDependencies gypfile opencv4nodejs config optionalDependencies && node ./install/prepublish.js",
     "postpack": "clean-package restore",
     "pack": "npm pack",
     "compile": "",
-    "publish_package": "npm publish --tag latest --access=public"
+    "publish_package": "npm publish --tag latest --access=public",
+    "test": "node ./install/install.js"
   },
   "overrides": {
     "node-gyp": "^9.3.1",
@@ -61,6 +62,9 @@
   },
   "gypfile": false,
   "dependencies": {
+    "@nut-tree/opencv-build-darwin": "^4.1.1-7",
+    "@nut-tree/opencv-build-linux": "^4.1.1-7",
+    "@nut-tree/opencv-build-win32": "^4.1.1-7",
     "prebuild-install": "^7.1.1"
   },
   "devDependencies": {
