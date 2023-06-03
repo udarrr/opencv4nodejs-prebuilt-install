@@ -48,11 +48,9 @@
     "rebuild": "node-gyp rebuild --jobs max",
     "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
     "prepack": "clean-package --remove scripts overrides devDependencies gypfile opencv4nodejs config optionalDependencies && node ./install/prepublish.js",
-    "postpack": "clean-package restore",
     "pack": "npm pack",
-    "compile": "",
-    "publish_package": "npm publish --tag latest --access=public",
-    "test": "node ./install/install.js"
+    "postpack": "clean-package restore",
+    "publish_package": "npm publish --tag latest --access=public"
   },
   "overrides": {
     "node-gyp": "^9.3.1",
