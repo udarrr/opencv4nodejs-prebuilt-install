@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7F0F285F-F384-D9DD-DF89-55CDAC5599DC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>opencv4nodejs</RootNamespace>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Locals">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props"/>
+  <ImportGroup Label="ExtensionSettings"/>
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros"/>
+  <PropertyGroup>
+    <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\..\bin\;$(MSBuildProjectDirectory)\..\bin\</ExecutablePath>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.node</TargetExt>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetPath>$(OutDir)\$(ProjectName).node</TargetPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\include\node;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\src;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\config;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\openssl\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\uv\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\zlib;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\v8\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include\opencv4;..\cc;..\cc\core;..\node_modules\nan;D:\jsmatch\opencv4nodejs-prebuilt\node_modules\native-node-utils\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>false</OmitFramePointers>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=opencv4nodejs;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENCV4NODEJS_FOUND_LIBRARY_WORLD;WIN;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\UDARRR\\AppData\\Local\\Temp\\prebuild\\node\\16.16.0\\x64\\node.lib&quot;;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv_world411.lib</AdditionalDependencies>
+      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetExt>.node</TargetExt>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\include\node;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\src;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\config;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\openssl\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\uv\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\zlib;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\v8\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include\opencv4;..\cc;..\cc\core;..\node_modules\nan;D:\jsmatch\opencv4nodejs-prebuilt\node_modules\native-node-utils\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=opencv4nodejs;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENCV4NODEJS_FOUND_LIBRARY_WORLD;WIN;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\include\node;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\src;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\config;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\openssl\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\uv\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\zlib;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\v8\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include\opencv4;..\cc;..\cc\core;..\node_modules\nan;D:\jsmatch\opencv4nodejs-prebuilt\node_modules\native-node-utils\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>Full</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=opencv4nodejs;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENCV4NODEJS_FOUND_LIBRARY_WORLD;WIN;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\UDARRR\\AppData\\Local\\Temp\\prebuild\\node\\16.16.0\\x64\\node.lib&quot;;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv_world411.lib</AdditionalDependencies>
+      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetExt>.node</TargetExt>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\include\node;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\src;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\config;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\openssl\openssl\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\uv\include;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\zlib;C:\Users\UDARRR\AppData\Local\Temp\prebuild\node\16.16.0\deps\v8\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include;D:\jsmatch\opencv4nodejs-prebuilt\osOpencvWorlds\win32\opencv\build\include\opencv4;..\cc;..\cc\core;..\node_modules\nan;D:\jsmatch\opencv4nodejs-prebuilt\node_modules\native-node-utils\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=opencv4nodejs;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENCV4NODEJS_FOUND_LIBRARY_WORLD;WIN;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\binding.gyp"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\cc\opencv4nodejs.cc">
+      <ObjectFileName>$(IntDir)\cc\opencv4nodejs.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\CustomMatAllocator.cc">
+      <ObjectFileName>$(IntDir)\cc\CustomMatAllocator.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ExternalMemTracking.cc">
+      <ObjectFileName>$(IntDir)\cc\ExternalMemTracking.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\core.cc">
+      <ObjectFileName>$(IntDir)\cc\core\core.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\coreConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\core\coreConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\Mat.cc">
+      <ObjectFileName>$(IntDir)\cc\core\Mat.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\Point.cc">
+      <ObjectFileName>$(IntDir)\cc\core\Point.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\Vec.cc">
+      <ObjectFileName>$(IntDir)\cc\core\Vec.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\Size.cc">
+      <ObjectFileName>$(IntDir)\cc\core\Size.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\Rect.cc">
+      <ObjectFileName>$(IntDir)\cc\core\Rect.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\RotatedRect.cc">
+      <ObjectFileName>$(IntDir)\cc\core\RotatedRect.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\core\TermCriteria.cc">
+      <ObjectFileName>$(IntDir)\cc\core\TermCriteria.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\imgproc\imgproc.cc">
+      <ObjectFileName>$(IntDir)\cc\imgproc\imgproc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\imgproc\imgprocConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\imgproc\imgprocConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\imgproc\MatImgproc.cc">
+      <ObjectFileName>$(IntDir)\cc\imgproc\MatImgproc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\imgproc\Contour.cc">
+      <ObjectFileName>$(IntDir)\cc\imgproc\Contour.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\imgproc\Moments.cc">
+      <ObjectFileName>$(IntDir)\cc\imgproc\Moments.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\calib3d\calib3d.cc">
+      <ObjectFileName>$(IntDir)\cc\calib3d\calib3d.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\calib3d\calib3dConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\calib3d\calib3dConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\calib3d\MatCalib3d.cc">
+      <ObjectFileName>$(IntDir)\cc\calib3d\MatCalib3d.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\io\io.cc">
+      <ObjectFileName>$(IntDir)\cc\io\io.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\io\ioConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\io\ioConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\io\VideoCapture.cc">
+      <ObjectFileName>$(IntDir)\cc\io\VideoCapture.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\io\VideoWriter.cc">
+      <ObjectFileName>$(IntDir)\cc\io\VideoWriter.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\photo\photo.cc">
+      <ObjectFileName>$(IntDir)\cc\photo\photo.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\photo\photoConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\photo\photoConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\photo\MatPhoto.cc">
+      <ObjectFileName>$(IntDir)\cc\photo\MatPhoto.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\video\video.cc">
+      <ObjectFileName>$(IntDir)\cc\video\video.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\video\BackgroundSubtractor.cc">
+      <ObjectFileName>$(IntDir)\cc\video\BackgroundSubtractor.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\video\BackgroundSubtractorMOG2.cc">
+      <ObjectFileName>$(IntDir)\cc\video\BackgroundSubtractorMOG2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\video\BackgroundSubtractorKNN.cc">
+      <ObjectFileName>$(IntDir)\cc\video\BackgroundSubtractorKNN.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ximgproc\ximgproc.cc">
+      <ObjectFileName>$(IntDir)\cc\ximgproc\ximgproc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ximgproc\MatXimgproc.cc">
+      <ObjectFileName>$(IntDir)\cc\ximgproc\MatXimgproc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ximgproc\SuperpixelSEEDS.cc">
+      <ObjectFileName>$(IntDir)\cc\ximgproc\SuperpixelSEEDS.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ximgproc\SuperpixelSLIC.cc">
+      <ObjectFileName>$(IntDir)\cc\ximgproc\SuperpixelSLIC.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\ximgproc\SuperpixelLSC.cc">
+      <ObjectFileName>$(IntDir)\cc\ximgproc\SuperpixelLSC.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\objdetect\objdetect.cc">
+      <ObjectFileName>$(IntDir)\cc\objdetect\objdetect.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\objdetect\CascadeClassifier.cc">
+      <ObjectFileName>$(IntDir)\cc\objdetect\CascadeClassifier.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\objdetect\HOGDescriptor.cc">
+      <ObjectFileName>$(IntDir)\cc\objdetect\HOGDescriptor.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\objdetect\DetectionROI.cc">
+      <ObjectFileName>$(IntDir)\cc\objdetect\DetectionROI.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\machinelearning.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\machinelearning.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\machinelearningConstants.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\machinelearningConstants.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\ParamGrid.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\ParamGrid.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\StatModel.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\StatModel.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\SVM.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\SVM.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\machinelearning\TrainData.cc">
+      <ObjectFileName>$(IntDir)\cc\machinelearning\TrainData.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\dnn\dnn.cc">
+      <ObjectFileName>$(IntDir)\cc\dnn\dnn.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\dnn\Net.cc">
+      <ObjectFileName>$(IntDir)\cc\dnn\Net.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\face.cc">
+      <ObjectFileName>$(IntDir)\cc\face\face.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FaceRecognizer.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FaceRecognizer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\EigenFaceRecognizer.cc">
+      <ObjectFileName>$(IntDir)\cc\face\EigenFaceRecognizer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FisherFaceRecognizer.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FisherFaceRecognizer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\LBPHFaceRecognizer.cc">
+      <ObjectFileName>$(IntDir)\cc\face\LBPHFaceRecognizer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\Facemark.cc">
+      <ObjectFileName>$(IntDir)\cc\face\Facemark.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FacemarkAAM.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FacemarkAAM.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FacemarkAAMData.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FacemarkAAMData.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FacemarkAAMParams.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FacemarkAAMParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FacemarkLBF.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FacemarkLBF.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\face\FacemarkLBFParams.cc">
+      <ObjectFileName>$(IntDir)\cc\face\FacemarkLBFParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\text\text.cc">
+      <ObjectFileName>$(IntDir)\cc\text\text.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\text\OCRHMMClassifier.cc">
+      <ObjectFileName>$(IntDir)\cc\text\OCRHMMClassifier.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\text\OCRHMMDecoder.cc">
+      <ObjectFileName>$(IntDir)\cc\text\OCRHMMDecoder.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\tracking.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\tracking.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Tracker.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Tracker.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\MultiTracker.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\MultiTracker.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerBoosting.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerBoosting.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerBoostingParams.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerBoostingParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerKCF.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerKCF.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerKCFParams.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerKCFParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerMIL.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerMIL.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerMILParams.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerMILParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerMedianFlow.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerMedianFlow.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerTLD.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerTLD.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerGOTURN.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerGOTURN.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerCSRT.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerCSRT.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerCSRTParams.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerCSRTParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\tracking\Trackers\TrackerMOSSE.cc">
+      <ObjectFileName>$(IntDir)\cc\tracking\Trackers\TrackerMOSSE.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\features2d.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\features2d.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\KeyPoint.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\KeyPoint.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\KeyPointMatch.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\KeyPointMatch.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\DescriptorMatch.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\DescriptorMatch.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\BFMatcher.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\BFMatcher.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\FeatureDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\FeatureDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\descriptorMatching.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\descriptorMatching.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\descriptorMatchingKnn.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\descriptorMatchingKnn.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\AGASTDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\AGASTDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\AKAZEDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\AKAZEDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\BRISKDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\BRISKDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\FASTDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\FASTDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\GFTTDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\GFTTDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\KAZEDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\KAZEDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\MSERDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\MSERDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\ORBDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\ORBDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\SimpleBlobDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\SimpleBlobDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\features2d\detectors\SimpleBlobDetectorParams.cc">
+      <ObjectFileName>$(IntDir)\cc\features2d\detectors\SimpleBlobDetectorParams.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\xfeatures2d\xfeatures2d.cc">
+      <ObjectFileName>$(IntDir)\cc\xfeatures2d\xfeatures2d.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\xfeatures2d\SIFTDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\xfeatures2d\SIFTDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\cc\xfeatures2d\SURFDetector.cc">
+      <ObjectFileName>$(IntDir)\cc\xfeatures2d\SURFDetector.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="D:\jsmatch\opencv4nodejs-prebuilt\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>
+  <ImportGroup Label="ExtensionTargets"/>
+</Project>

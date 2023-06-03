@@ -1,8 +1,7 @@
 vs
 .vs
 .vscode
-build
-bin
+./build
 node_modules
 crash.log
 coverage
