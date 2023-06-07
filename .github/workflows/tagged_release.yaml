@@ -22,9 +22,9 @@ jobs:
         arch: [x64]
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           architecture: ${{ matrix.arch }}
@@ -73,9 +73,9 @@ jobs:
         electron: [ "8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0", "14.0.0" ]
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           architecture: ${{ matrix.arch }}
@@ -121,12 +121,12 @@ jobs:
         node: ['16']
         arch: [x64]
         runtime: [ electron ]
-        electron: [ "15.0.0", "16.0.0", "17.0.0", "18.0.0", "19.0.0" ]
+        electron: [ "15.0.0", "16.0.0", "17.0.0", "18.0.0", "19.0.0", "22.0.0", "23.0.0", "24.0.0", "25.0.0" ]
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           architecture: ${{ matrix.arch }}
@@ -164,9 +164,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
