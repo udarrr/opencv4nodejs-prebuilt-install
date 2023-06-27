@@ -51,23 +51,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: Install
+      - name: Dependency install
         run: npm ci --unsafe-perm
       - name: Create opencvlib
         run: npm run create_opencvlib
-      - name: 'Send package to repository Windows'
+      - name: 'Send Windows release to storage'
         if: ${{ matrix.os.name == 'Windows' }}
         uses: ncipollo/release-action@v1
         with:
           artifacts: "opencv/build/lib/Release/*.tar.gz"
           allowUpdates: true
-      - name: 'Send package to repository macos'
+      - name: 'Send macos release to storage'
         if: ${{ matrix.os.name == 'macos' }}
         uses: ncipollo/release-action@v1
         with:
           artifacts: "opencv/build/lib/*.tar.gz"
           allowUpdates: true
-      - name: 'Send package to repository Ubuntu'
+      - name: 'Send Ubuntu release to storage'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         uses: ncipollo/release-action@v1
         with:
