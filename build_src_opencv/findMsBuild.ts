@@ -4,8 +4,10 @@ import { execFile } from "./utils";
 const fg = require("fast-glob");
 
 export async function findMsBuild() {
-  const progFiles = new Set([process.env.programfiles, process.env.ProgramW6432, process.env["programfiles(x86)"]]);
+  const progFiles = [process.env.programfiles, process.env.ProgramW6432, process.env["programfiles(x86)"]];
   const matches: string[] = [];
+
+  console.log(progFiles.toString());
 
   for (const progFile of progFiles) {
     if (progFile) {
