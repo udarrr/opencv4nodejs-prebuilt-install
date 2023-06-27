@@ -12,6 +12,7 @@ export async function findMsBuild() {
       const reg = `${progFile.replace(/\\/g, "/")}/Microsoft Visual Studio/*/*/MSBuild/*/Bin/MSBuild.exe`;
 
       for (const m of await fg([reg], {})) {
+        console.log(`Possible path is ${JSON.stringify(m)}`);
         matches.push(path.resolve(m));
       }
     }
