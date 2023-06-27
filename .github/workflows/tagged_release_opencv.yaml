@@ -2,7 +2,7 @@ name: Create tagged release
 on:
   push:
     tags:
-      - v_cv4.1.*
+      - vcv4.1.*
 
 jobs:
   prebuild-node:
