@@ -43,7 +43,7 @@
     "install": "prebuild-install || exit 0",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "build": "node-gyp build --jobs max",
+    "build": "node install.js && node-gyp build --jobs max",
     "build-debug": "BINDINGS_DEBUG=true npm run build",
     "rebuild": "node-gyp rebuild --jobs max",
     "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
@@ -60,9 +60,6 @@
   },
   "gypfile": false,
   "dependencies": {
-    "@nut-tree/opencv-build-darwin": "^4.1.1-7",
-    "@nut-tree/opencv-build-linux": "^4.1.1-7",
-    "@nut-tree/opencv-build-win32": "^4.1.1-7",
     "prebuild-install": "^7.1.1"
   },
   "devDependencies": {

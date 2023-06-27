@@ -58,6 +58,8 @@ public:
 	static NAN_METHOD(EigenAsync);
 	static NAN_METHOD(Solve);
 	static NAN_METHOD(SolveAsync);
+	static NAN_METHOD(Invert);
+	static NAN_METHOD(InvertAsync);
 };
 
 #endif

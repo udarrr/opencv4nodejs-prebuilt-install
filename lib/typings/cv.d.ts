@@ -167,6 +167,8 @@ export function seamlessClone(src: Mat, dst: Mat, mask: Mat, p: Point2, flags: n
 export function seamlessCloneAsync(src: Mat, dst: Mat, mask: Mat, p: Point2, flags: number): Promise<Mat>;
 export function solve(mat: Mat, mat2: Mat, flags?: number): Mat;
 export function solveAsync(mat: Mat, mat2: Mat, flags?: number): Promise<Mat>;
+export function invert(mat: Mat, flags?: number): Mat;
+export function invertAsync(mat: Mat, flags?: number): Promise<Mat>;
 export function solveP3P(objectPoints: Point3[], imagePoints: Point2[], cameraMatrix: Mat, distCoeffs: number[], flags?: number): { returnValue: boolean, rvecs: Mat[], tvecs: Mat[] };
 export function solveP3PAsync(objectPoints: Point3[], imagePoints: Point2[], cameraMatrix: Mat, distCoeffs: number[], flags?: number): Promise<{ returnValue: boolean, rvecs: Mat[], tvecs: Mat[] }>;
 export function solvePnP(objectPoints: Point3[], imagePoints: Point2[], cameraMatrix: Mat, distCoeffs: number[], useExtrinsicGuess?: boolean, flags?: number): { returnValue: boolean, rvec: Vec3, tvec: Vec3 };
