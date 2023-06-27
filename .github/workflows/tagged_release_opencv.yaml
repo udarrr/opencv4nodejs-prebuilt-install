@@ -30,23 +30,22 @@ jobs:
           architecture: ${{ matrix.arch }}
       - name: 'Install npm@^8 to get a more up to date bundled node-gyp'
         run: npm install --global npm@8.3.1
-      - name: 'Install Windows dependencies'
+      - name: 'Add Windows apps'
         if: ${{ matrix.os.name == 'Windows' }}
         run: |
           choco install cmake -y
           choco upgrade cmake
-     
-      - name: 'Send Windows release to storage'
+      - name: 'Setup-msbuild'
         if: ${{ matrix.os.name == 'Windows' }}
-        uses: microsoft/setup-msbuild@v1.1
-      - name: 'Install Linux dependencies'
+        uses: microsoft/setup-msbuild@v1.1.3
+      - name: 'Add Linux apps'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         run: |
           sudo apt-get update
           sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
           sudo apt-get install libxvidcore-dev libx264-dev
           sudo apt-get install cmake
-      - name: 'Install Mac dependencies'
+      - name: 'Add macos apps'
         if: ${{ matrix.os.name == 'macos' }}
         uses: maxim-lobanov/setup-xcode@v1
         with:
