@@ -35,6 +35,10 @@ jobs:
         run: |
           choco install cmake -y
           choco upgrade cmake
+     
+      - name: 'Send Windows release to storage'
+        if: ${{ matrix.os.name == 'Windows' }}
+        uses: microsoft/setup-msbuild@v1.1
       - name: 'Install Linux dependencies'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         run: |
@@ -59,18 +63,18 @@ jobs:
         if: ${{ matrix.os.name == 'Windows' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/Release/*.tar.gz"
+          artifacts: "opencv/build/lib/Release/*.*"
           allowUpdates: true
       - name: 'Send macos release to storage'
         if: ${{ matrix.os.name == 'macos' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/*.tar.gz"
+          artifacts: "opencv/build/lib/*.*"
           allowUpdates: true
       - name: 'Send Ubuntu release to storage'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/*.tar.gz"
+          artifacts: "opencv/build/lib/*.*"
           allowUpdates: true
        
