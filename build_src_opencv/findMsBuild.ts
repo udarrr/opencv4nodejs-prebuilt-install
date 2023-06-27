@@ -1,7 +1,7 @@
 import * as path from "path";
 const log = require("npmlog");
 import { execFile } from "./utils";
-const fg = require("fast-glob");
+import blob from '@u4/tiny-glob';
 
 export async function findMsBuild() {
   const progFiles = [process.env.programfiles, process.env.ProgramW6432, process.env["programfiles(x86)"]];
@@ -13,7 +13,7 @@ export async function findMsBuild() {
     if (progFile) {
       const reg = `${progFile.replace(/\\/g, "/")}/Microsoft Visual Studio/*/*/MSBuild/*/Bin/MSBuild.exe`;
 
-      for (const m of await fg([reg], {})) {
+      for (const m of await blob(reg, {})) {
         console.log(`Possible path is ${JSON.stringify(m)}`);
         matches.push(path.resolve(m));
       }
