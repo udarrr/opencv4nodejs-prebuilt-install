@@ -71,8 +71,15 @@ async function getWinCmakeFlags(msversion: string) {
   if (!cmakeArch) {
     throw new Error(`no cmake arch found for process.arch: ${process.arch}`);
   }
+  let GFlag: string[] = [];
 
-  return ["-G", `${cmakeVsCompiler}${cmakeArch}`].concat(await getSharedCmakeFlags());
+  if (Number(msversion) <= 15) {
+    GFlag = ["-G", `${cmakeVsCompiler}${cmakeArch}`];
+  } else {
+    GFlag = ["-G", `${cmakeVsCompiler}`];
+  }
+
+  return GFlag.concat(await getSharedCmakeFlags());
 }
 
 function getCmakeArgs(cmakeFlags: string[]) {

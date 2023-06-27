@@ -51,7 +51,7 @@
     "pack": "npm pack",
     "postpack": "clean-package restore",
     "publish_package": "npm publish --tag latest --access=public",
-    "build_src_opencvlib": "rimraf build_release_opencv && tsc",
+    "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && tsc",
     "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
     "test_opencvlib": "jest ./test"
   },

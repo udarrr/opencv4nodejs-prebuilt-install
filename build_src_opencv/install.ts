@@ -86,7 +86,7 @@ class InstallOpencv {
       await setupOpencv();
     } catch (err) {
       log.error(err);
-      process.exit(1);
+      // process.exit(1);
     }
   }
 
@@ -105,6 +105,13 @@ class InstallOpencv {
 
     await InstallOpencv.install();
     packageJson.opencv4nodejs.disableAutoBuild = 1;
+
+    try {
+      fs.writeFileSync(filename, JSON.stringify(packageJson, null, 2));
+    } catch (err) {
+      console.log(err);
+      process.exit(-1);
+    }
   }
 }
 InstallOpencv.start();
