@@ -6,7 +6,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "outDir": "build",
+    "outDir": "build_release_opencv",
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
@@ -20,6 +20,6 @@
     "tabSize": 2
   },
   "include": [
-    "src"
+    "build_src_opencv"
   ]
 }

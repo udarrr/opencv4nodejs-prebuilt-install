@@ -12,3 +12,5 @@ data/dnn
 .DS_Store
 native-node-utils
 build
+opencv
+build_release_opencv

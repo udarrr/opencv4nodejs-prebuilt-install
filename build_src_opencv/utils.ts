@@ -31,7 +31,7 @@ export function spawn(cmd: string, args: string[], options?: child_process.ExecO
   log.silly('install', 'spawning:', cmd, args)
   return new Promise(function(resolve, reject) {
     try {
-      const child = child_process.spawn(cmd, args, Object.assign({}, { stdio: 'inherit' }, options))
+      const child = child_process.spawn(cmd, args, Object.assign({}, { stdio: 'inherit' }, options) as any)
 
       child.on('exit', function (code) {
         if (typeof code !== 'number') {

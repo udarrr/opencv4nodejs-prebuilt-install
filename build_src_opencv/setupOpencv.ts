@@ -61,7 +61,7 @@ function getCudaCmakeFlags() {
   ];
 }
 
-function getSharedCmakeFlags() {
+async function getSharedCmakeFlags() {
   let conditionalFlags = isWithoutContrib()
     ? []
     : [
@@ -69,7 +69,7 @@ function getSharedCmakeFlags() {
       `-DOPENCV_EXTRA_MODULES_PATH=${dirs.opencvContribModules}`
     ]
 
-  if (buildWithCuda() && isCudaAvailable()) {
+  if (buildWithCuda() && await isCudaAvailable()) {
     log.info('install', 'Adding CUDA flags...');
     conditionalFlags = conditionalFlags.concat(getCudaCmakeFlags());
   }
@@ -79,7 +79,7 @@ function getSharedCmakeFlags() {
     .concat(parseAutoBuildFlags())
 }
 
-function getWinCmakeFlags(msversion: string) {
+async function getWinCmakeFlags(msversion: string) {
   const cmakeVsCompiler = (cmakeVsCompilers as any)[msversion]
   const cmakeArch = (cmakeArchs as any)[process.arch]
 
@@ -93,7 +93,7 @@ function getWinCmakeFlags(msversion: string) {
   return [
     '-G',
     `${cmakeVsCompiler}${cmakeArch}`
-  ].concat(getSharedCmakeFlags())
+  ].concat(await getSharedCmakeFlags())
 }
 
 function getCmakeArgs(cmakeFlags: string[]) {
@@ -141,7 +141,7 @@ export async function setupOpencv() {
   }
   await spawn('git', ['clone', '-b', `${tag}`, '--single-branch', '--depth',  '1', '--progress', opencvRepoUrl], { cwd: dirs.opencvRoot })
 
-  const cmakeArgs = getCmakeArgs(cMakeFlags)
+  const cmakeArgs = getCmakeArgs(await cMakeFlags)
   log.info('install', 'running cmake %s', cmakeArgs)
   await spawn('cmake', cmakeArgs, { cwd: dirs.opencvBuild })
   log.info('install', 'starting build...')

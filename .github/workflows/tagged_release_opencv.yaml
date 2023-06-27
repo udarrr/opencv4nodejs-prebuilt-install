@@ -52,27 +52,25 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install
-        working-directory: opencv_build
         run: npm ci --unsafe-perm
-      - name: Build
-        working-directory: opencv_build
-        run: npm run install
+      - name: Create opencvlib
+        run: npm run create_opencvlib
       - name: 'Send package to repository Windows'
         if: ${{ matrix.os.name == 'Windows' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv_build/opencv/build/lib/Release/*.tar.gz"
+          artifacts: "opencv/build/lib/Release/*.tar.gz"
           allowUpdates: true
       - name: 'Send package to repository macos'
         if: ${{ matrix.os.name == 'macos' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv_build/opencv/build/lib/*.tar.gz"
+          artifacts: "opencv/build/lib/*.tar.gz"
           allowUpdates: true
       - name: 'Send package to repository Ubuntu'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv_build/opencv/build/lib/*.tar.gz"
+          artifacts: "opencv/build/lib/*.tar.gz"
           allowUpdates: true
        
