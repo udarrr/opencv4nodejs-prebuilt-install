@@ -86,7 +86,7 @@ class InstallOpencv {
       await setupOpencv();
     } catch (err) {
       log.error(err);
-      // process.exit(1);
+      process.exit(1);
     }
   }
 
