@@ -16,8 +16,8 @@ jobs:
             version: latest
           - name: macOS
             version: latest
-          - name: Windows
-            version: 2019
+          # - name: Windows
+          #   version: 2019
         node: ['16']
         arch: [x64]
     steps:
