@@ -52,7 +52,7 @@
     "postpack": "clean-package restore",
     "publish_package": "npm publish --tag latest --access=public",
     "build_src_opencvlib": "rimraf build_release_opencv && tsc",
-    "create_opencvlib": "npm run build_src_opencvlib && node install.js",
+    "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
     "test_opencvlib": "jest ./test"
   },
   "opencv4nodejs": {
@@ -69,6 +69,7 @@
   },
   "gypfile": false,
   "dependencies": {
+    "fast-glob": "^3.2.12",
     "prebuild-install": "^7.1.1"
   },
   "devDependencies": {
