@@ -51,12 +51,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: 'Go to opencv_build folder'
-        run: cd opencv_build
       - name: Install
+        working-directory: ./opencv_build
         run: npm ci --unsafe-perm
       - name: Build
         shell: bash
+        working-directory: ./opencv_build
         run: npm run install
       - name: 'Send package to repository Windows'
         if: ${{ matrix.os.name == 'Windows' }}
