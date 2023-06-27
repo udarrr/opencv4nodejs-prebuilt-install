@@ -8,6 +8,8 @@ export declare const cmakeVsCompilers: {
     '12': string;
     '14': string;
     '15': string;
+    '16': string;
+    '17': string;
 };
 export declare const cmakeArchs: {
     'x64': string;

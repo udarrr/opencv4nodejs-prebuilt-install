@@ -32,6 +32,7 @@ export const cmakeVsCompilers = {
   '12': 'Visual Studio 12 2013',
   '14': 'Visual Studio 14 2015',
   '15': 'Visual Studio 15 2017',
+  '16': 'Visual Studio 15 2019',
   '17': 'Visual Studio 15 2022',
 }
 
