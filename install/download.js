@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const pack_1 = require("../build_release_opencv/build_src_opencv/pack");
+const pack_1 = require("../build_release_opencv/pack");
 const Downloader = require("nodejs-file-downloader");
 const packageJson = require("../package.json");
 const path = require("path");
@@ -39,6 +39,11 @@ async function download() {
     } else if (process.platform === "win32") {
       pack_1.Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "win32")}`, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`).then(() => console.log("done"));
     }
+    await new Promise((res) =>
+      setTimeout(() => {
+        res("done");
+      }, 5000)
+    );
     console.log("All done");
   } catch (error) {
     console.log("Download failed", error);

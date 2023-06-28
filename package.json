@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.153",
+  "version": "4.1.154",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -51,7 +51,7 @@
     "pack": "npm pack",
     "postpack": "clean-package restore",
     "publish_package": "npm publish --tag latest --access=public",
-    "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && tsc",
+    "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && rimraf osOpencvWorlds && tsc",
     "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
     "test_opencvlib": "jest ./test"
   },

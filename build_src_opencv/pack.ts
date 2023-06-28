@@ -41,7 +41,7 @@ export class Pack {
   }
 
   static async unpack(folderPath: string, filePath: string) {
-    const res = await tar.extract({ cwd: folderPath, file: filePath, strip: 2 });
+    const res = await tar.extract({ cwd: folderPath, file: filePath });
     console.log(res);
   }
 }
