@@ -115,7 +115,7 @@
                     "cc/xfeatures2d/SURFDetector.cc"
                 ],
                 "cflags": [
-                    "-std=c++11"
+                    "-std=c++14"
                 ],
                 "cflags!": [
                     "-fno-exceptions"
@@ -126,7 +126,7 @@
                 ],
                 "xcode_settings": {
                     "OTHER_CFLAGS": [
-                        "-std=c++11",
+                        "-std=c++14",
                         "-stdlib=libc++"
                     ],
                     "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
