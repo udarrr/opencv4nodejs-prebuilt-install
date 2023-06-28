@@ -94,7 +94,7 @@ class InstallOpencv {
   static async start() {
     const filename = path.join(process.cwd(), "package.json");
     const packageJson = require(filename);
-    const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion.replaceAll(".", "")}.tgz`;
+    const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
 
     delete packageJson.opencv4nodejs.disableAutoBuild;
 

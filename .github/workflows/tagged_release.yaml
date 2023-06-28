@@ -129,6 +129,8 @@ jobs:
           allowUpdates: true
 
   prebuild-electron-node14:
+    needs:
+      - prebuild-lib
     name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
@@ -181,6 +183,8 @@ jobs:
           allowUpdates: true
 
   prebuild-electron-node16:
+    needs:
+      - prebuild-lib
     name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
@@ -233,6 +237,7 @@ jobs:
 
   deploy:
     needs:
+      - prebuild-lib
       - prebuild-node
       - prebuild-electron-node14
       - prebuild-electron-node16
