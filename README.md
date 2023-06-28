@@ -5,14 +5,14 @@
 ![Supported node versions](https://img.shields.io/badge/node-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019%2C%2020-green)
 ![Supported electron versions](https://img.shields.io/badge/electron-8%2C%209%2C%2010%2C%2011%2C%2012%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019-green)
 
-### Simple installation Opencv 4.1.1 for node with pre-compiled bindings
+### Simple installation Opencv versions for node with pre-compiled bindings
 
 Cross-platform!
 
 #### Supports
 
 - Windows, Linux , MacOS
-- node 12,13,14,15,16,17,18,19,20
+- node 12,14,15,16,17,18,19,20
 - arh x64
 
 ## How to install
@@ -21,15 +21,9 @@ Cross-platform!
 npm i opencv4nodejs-prebuilt-install
 ```
 
-- **[Examples](#examples)**
-- **[Quick Start](#quick-start)**
-- **[With TypeScript](#with-typescript)**
+- prebuilt in node_modules/opencv4nodejs-prebuilt-install/build
 
-## Examples
-
-See [examples](https://github.com/UrielCh/opencv4nodejs/tree/master/examples) for implementation.
-
-## Quick Start
+## Quick Start with prebuild
 
 ``` javascript
 const cv = require('opencv4nodejs-prebuilt-install');
@@ -41,4 +35,80 @@ const cv = require('opencv4nodejs-prebuilt-install');
 import * as cv from 'opencv4nodejs-prebuilt-install'
 ```
 
-Check out the TypeScript [examples](https://github.com/urielch/opencv4nodejs/tree/master/examples).
+## Local compiling
+
+Set your own properties inside of package.json
+
+```nodejs
+  "opencv4nodejs": {
+    "autoBuildWithoutContrib": 1,
+    "autoBuildOpencvVersion": "4.1.1",
+    "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui,videoio -DOPENCV_FORCE_3RDPARTY_BUILD=ON -DBUILD_PNG=ON -DBUILD_TIFF=ON -DBUILD_JASPER=ON -DBUILD_JPEG=ON -DBUILD_ZLIB=ON -DBUILD_OPENEXR=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER=ON -DBUILD_USE_SYMLINKS=OFF -DWITH_VTK=OFF",
+    "disableAutoBuild": 1
+  },
+```
+
+- Then for building opencv for current processor
+
+```nodejs
+npm run create_opencvlib
+```
+
+Result in folder osOpencvWorlds/opencv/build/bin for windows or osOpencvWorlds/opencv/build/lib for linux and darwin
+
+- and then for building opencv for current node with have been prepared files for processor
+
+```nodejs
+npm run create_opencvnode_prebuild
+```
+
+Result in folder opencv/build/bin for windows or in opencv/build/lib for linux and darwin
+
+## Add bindings to native methos of opencv
+
+For example method invert
+
+- added to core.cc
+
+```typescript
+Nan::SetMethod(target, "invert", Invert);
+Nan::SetMethod(target, "invertAsync", InvertAsync);
+
+NAN_METHOD(Core::Invert) {
+ FF::syncBinding<CoreBindings::Invert>("Core", "Invert", info);
+}
+
+NAN_METHOD(Core::InvertAsync) {
+ FF::asyncBinding<CoreBindings::Invert>("Core", "Invert", info);
+}
+```
+
+- added to core.h
+
+```typescript
+ static NAN_METHOD(Invert);
+ static NAN_METHOD(InvertAsync);
+```
+
+- added to coreBinding.h
+
+```typescript
+ class Invert : public CvClassMethodBinding<Mat> {
+ public:
+  void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
+         auto flags = opt<FF::IntConverter>("flags", 0);
+   auto dst = ret<Mat::Converter>("dst");
+
+   executeBinding = [=]() {
+    cv::invert(self->ref(), dst->ref(), flags->ref());
+   };
+  };
+ };
+```
+
+- added to cv.d.ts
+
+```typescript
+export function invert(mat: Mat, flags?: number): Mat;
+export function invertAsync(mat: Mat, flags?: number): Promise<Mat>;
+```
