@@ -92,7 +92,7 @@ jobs:
             version: latest
           - name: Windows
             version: 2019
-        node: ["12", "13", "14", "15", "16", "17", "18"]
+        node: ["12", "13", "14", "15", "16", "17", "18", "19.0.0", "20.0.0"]
         arch: [x64]
     steps:
       - name: Set up Git repository
