@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.165",
+  "version": "4.1.166",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -57,26 +57,20 @@
     "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui,videoio -DOPENCV_FORCE_3RDPARTY_BUILD=ON -DBUILD_PNG=ON -DBUILD_TIFF=ON -DBUILD_JASPER=ON -DBUILD_JPEG=ON -DBUILD_ZLIB=ON -DBUILD_OPENEXR=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER=ON -DBUILD_USE_SYMLINKS=OFF -DWITH_VTK=OFF",
     "disableAutoBuild": 1
   },
-  "overrides": {
-    "node-gyp": "^9.3.1",
-    "prebuild": {
-      "node-gyp": "^9.3.1"
-    }
-  },
   "gypfile": false,
   "dependencies": {
     "@u4/tiny-glob": "^0.3.2",
     "nodejs-file-downloader": "^4.12.1",
     "prebuild-install": "^7.1.1",
-    "tar": "^6.1.15"
+    "@udarrr/prebuild": "^11.0.5",
+    "tar": "^6.1.15",
+    "nan": "^2.17.0",
+    "native-node-utils": "^0.2.7",
+    "npmlog": "^7.0.1"
   },
   "devDependencies": {
     "@types/tar": "^6.1.5",
     "jest": "^26.0.1",
-    "nan": "^2.17.0",
-    "native-node-utils": "^0.2.7",
-    "npmlog": "^7.0.1",
-    "prebuild": "^11.0.4",
     "rimraf": "^3.0.2",
     "typescript": "^4.6.3"
   },
