@@ -55,6 +55,11 @@ const pathToDirLib = getPathToDirLib();
 const pathToLib = getPathToLib(pathToDirLib);
 const pathToInclude = getPathToInclude();
 
+console.log(process.cwd());
+console.log(pathToDirLib);
+console.log(pathToLib);
+console.log(pathToInclude);
+
 const linkLib = (lib) => {
   if (process.platform === "darwin") {
     return `-l${basename(lib, ".dylib").replace("lib", "")}`;
