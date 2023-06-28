@@ -118,14 +118,6 @@ class InstallOpencv {
       } else if (process.platform === "win32") {
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`);
       }
-
-      if (process.platform === "darwin") {
-        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "darwin")}`, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
-      } else if (process.platform === "linux") {
-        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "linux")}`, `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`);
-      } else if (process.platform === "win32") {
-        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "win32")}`, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`);
-      }
       fs.writeFileSync(filename, JSON.stringify(packageJson, null, 2));
     } catch (err) {
       console.log(err);
