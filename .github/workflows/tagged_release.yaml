@@ -5,7 +5,7 @@ on:
       - v4.1.*
 
 jobs:
- prebuild-lib:
+  prebuild-lib:
     name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
@@ -76,7 +76,7 @@ jobs:
         with:
           artifacts: "osOpencvWorlds/linux/*.tgz"
           allowUpdates: true
-          
+
   prebuild-node:
     name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
