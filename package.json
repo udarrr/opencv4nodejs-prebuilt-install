@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.157",
+  "version": "4.1.158",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -43,21 +43,17 @@
     "install": "prebuild-install || exit 0",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "build": "node install.js && node-gyp build --jobs max",
-    "build-debug": "BINDINGS_DEBUG=true npm run build",
-    "rebuild": "node-gyp rebuild --jobs max",
-    "prebuild": "node install/download.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
     "prepack": "clean-package --remove scripts overrides devDependencies gypfile opencv4nodejs config optionalDependencies && node ./install/prepublish.js",
     "pack": "npm pack",
     "postpack": "clean-package restore",
     "publish_package": "npm publish --tag latest --access=public",
     "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && rimraf osOpencvWorlds/linux/opencv && rimraf osOpencvWorlds/win32/opencv && rimraf osOpencvWorlds/darwin/opencv && tsc",
     "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
-    "test_opencvlib": "jest ./test"
+    "create_opencvnode_prebuild": "npm run build_src_opencvlib && node install/download.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
   },
   "opencv4nodejs": {
     "autoBuildWithoutContrib": 1,
-    "autoBuildOpencvVersion": "4.6.0",
+    "autoBuildOpencvVersion": "4.1.1",
     "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui,videoio -DOPENCV_FORCE_3RDPARTY_BUILD=ON -DBUILD_PNG=ON -DBUILD_TIFF=ON -DBUILD_JASPER=ON -DBUILD_JPEG=ON -DBUILD_ZLIB=ON -DBUILD_OPENEXR=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER=ON -DBUILD_USE_SYMLINKS=OFF -DWITH_VTK=OFF",
     "disableAutoBuild": 1
   },

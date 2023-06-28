@@ -122,7 +122,7 @@ jobs:
         run: npm ci --unsafe-perm
       - name: Prebuild
         shell: bash
-        run: npm run prebuild
+        run: npm run create_opencvnode_prebuild
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "prebuilds/*.tar.gz"
@@ -173,7 +173,7 @@ jobs:
   #       run: npm ci --unsafe-perm
   #     - name: Prebuild
   #       shell: bash
-  #       run: npm run prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
+  #       run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
   #     - uses: ncipollo/release-action@v1
   #       with:
   #         artifacts: "prebuilds/*.tar.gz"
@@ -224,7 +224,7 @@ jobs:
   #       run: npm ci --unsafe-perm
   #     - name: Prebuild
   #       shell: bash
-  #       run: npm run prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
+  #       run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
   #     - uses: ncipollo/release-action@v1
   #       with:
   #         artifacts: "prebuilds/*.tar.gz"

@@ -17,5 +17,5 @@
     "indentSize": 2,
     "tabSize": 2
   },
-  "include": ["build_src_opencv", "install"]
+  "include": ["build_src_opencv"]
 }
