@@ -8,6 +8,7 @@ import { getLibsFactory } from "./getLibsFactory";
 import { setupOpencv } from "./setupOpencv";
 import { AutoBuildFile } from "./types";
 import { isOSX, isWin, requireCmake, requireGit } from "./utils";
+import { Pack } from "./pack";
 
 const log = require("npmlog");
 
@@ -93,6 +94,7 @@ class InstallOpencv {
   static async start() {
     const filename = path.join(process.cwd(), "package.json");
     const packageJson = require(filename);
+    const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion.replaceAll(".", "")}.tgz`;
 
     delete packageJson.opencv4nodejs.disableAutoBuild;
 
@@ -107,6 +109,27 @@ class InstallOpencv {
     packageJson.opencv4nodejs.disableAutoBuild = 1;
 
     try {
+      let patterns: Array<string> = [
+        path.join(process.cwd(), "opencv", "build", "include"),
+        path.join(process.cwd(), "opencv", "build", "lib"),
+        path.join(process.cwd(), "opencv", "build", "bin"),
+      ];
+
+      if (process.platform === "darwin") {
+        await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
+      } else if (process.platform === "linux") {
+        await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`);
+      } else if (process.platform === "win32") {
+        await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`);
+      }
+
+      if (process.platform === "darwin") {
+        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "darwin")}`, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
+      } else if (process.platform === "linux") {
+        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "linux")}`, `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`);
+      } else if (process.platform === "win32") {
+        await Pack.unpack(`${path.join(process.cwd(), "osOpencvWorlds", "win32")}`, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`);
+      }
       fs.writeFileSync(filename, JSON.stringify(packageJson, null, 2));
     } catch (err) {
       console.log(err);

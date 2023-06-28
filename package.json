@@ -70,10 +70,11 @@
   "gypfile": false,
   "dependencies": {
     "@u4/tiny-glob": "^0.3.2",
-    "fast-glob": "^3.2.12",
-    "prebuild-install": "^7.1.1"
+    "prebuild-install": "^7.1.1",
+    "tar": "^6.1.15"
   },
   "devDependencies": {
+    "@types/tar": "^6.1.5",
     "jest": "^26.0.1",
     "nan": "^2.17.0",
     "native-node-utils": "^0.2.7",

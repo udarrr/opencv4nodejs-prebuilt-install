@@ -62,18 +62,18 @@ jobs:
         if: ${{ matrix.os.name == 'Windows' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/Release/*.*"
+          artifacts: "osOpencvWorlds/win32/*.tgz"
           allowUpdates: true
       - name: 'Send macos release to storage'
         if: ${{ matrix.os.name == 'macos' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/*.*"
+          artifacts: "osOpencvWorlds/darwin/*.tgz"
           allowUpdates: true
       - name: 'Send Ubuntu release to storage'
         if: ${{ matrix.os.name == 'Ubuntu' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "opencv/build/lib/*.*"
+          artifacts: "osOpencvWorlds/linux/*.tgz"
           allowUpdates: true
        
