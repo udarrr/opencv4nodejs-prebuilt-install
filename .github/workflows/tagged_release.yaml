@@ -86,8 +86,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - name: Ubuntu
-            version: latest
+          # - name: Ubuntu
+          #   version: latest
           - name: macOS
             version: latest
           - name: Windows
