@@ -109,11 +109,7 @@ class InstallOpencv {
     packageJson.opencv4nodejs.disableAutoBuild = 1;
 
     try {
-      let patterns: Array<string> = [
-        path.join(process.cwd(), "opencv", "build", "include"),
-        path.join(process.cwd(), "opencv", "build", "lib"),
-        path.join(process.cwd(), "opencv", "build", "bin"),
-      ];
+      let patterns: Array<string> = [path.join("opencv", "build", "include"), path.join("opencv", "build", "lib"), path.join("opencv", "build", "bin")];
 
       if (process.platform === "darwin") {
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
