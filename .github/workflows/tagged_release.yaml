@@ -120,6 +120,8 @@ jobs:
           xcode-version: latest
       - name: Install
         run: npm ci --unsafe-perm
+      - name: Dependency install
+        run: npm run build build_src_opencvlib
       - name: Prebuild
         shell: bash
         run: npm run prebuild
