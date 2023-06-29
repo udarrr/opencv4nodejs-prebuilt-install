@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.174",
+  "version": "4.1.175",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -49,7 +49,7 @@
     "publish_package": "npm publish --tag latest --access=public",
     "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && rimraf osOpencvWorlds/linux/opencv && rimraf osOpencvWorlds/win32/opencv && rimraf osOpencvWorlds/darwin/opencv && tsc",
     "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
-    "create_opencvnode_prebuild": "npm run build_src_opencvlib && node install/download.js && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
+    "create_opencvnode_prebuild": "npm run build_src_opencvlib && node install/download.js && rimraf osOpencvWorlds/linux/opencv/build/lib/cmake && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
   },
   "opencv4nodejs": {
     "autoBuildWithoutContrib": 1,
@@ -59,14 +59,15 @@
   },
   "gypfile": false,
   "dependencies": {
+    "@nut-tree/opencv-build-linux": "^4.1.1-7",
     "@u4/tiny-glob": "^0.3.2",
-    "nodejs-file-downloader": "^4.12.1",
-    "prebuild-install": "^7.1.1",
     "@udarrr/prebuild": "^11.0.6",
-    "tar": "^6.1.15",
     "nan": "^2.17.0",
     "native-node-utils": "^0.2.7",
-    "npmlog": "^7.0.1"
+    "nodejs-file-downloader": "^4.12.1",
+    "npmlog": "^7.0.1",
+    "prebuild-install": "^7.1.1",
+    "tar": "^6.1.15"
   },
   "devDependencies": {
     "@types/tar": "^6.1.5",
