@@ -44,7 +44,7 @@ async function download() {
         res("done");
       }, 5000)
     );
-    console.log("All done");
+    console.log("Lib has been downloaded");
   } catch (error) {
     console.log("Download failed", error);
   }

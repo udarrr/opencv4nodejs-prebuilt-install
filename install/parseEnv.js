@@ -1,8 +1,8 @@
 const defaults = require("./defaults");
-const envName = process.argv[2];
+const envName = process.argv[2]
 
 if (!envName) {
-  throw new Error("no env name passed to parseEnv");
+  throw new Error('no env name passed to parseEnv')
 }
-const outputs = process.env[envName] || defaults[envName] || "";
- console.log(outputs)
+const outputs = (process.env[envName] || defaults[envName]() || '').split('\n')
+outputs.forEach(o => console.log(o))
