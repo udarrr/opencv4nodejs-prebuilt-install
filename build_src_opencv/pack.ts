@@ -33,7 +33,6 @@ export class Pack {
       {
         gzip: { level: 9 },
         file: tarPath,
-        mode: Pack.mode("444") | Pack.mode("222"),
       },
       filenames
     );
