@@ -91,8 +91,8 @@ jobs:
           # - name: macOS
           #   version: latest
           # - name: Windows
-            # version: 2019
-        node: ["12", "14", "16", "17", "18", "19.0.0", "20.0.0"]
+          # version: 2019
+        node: ["12", "14", "16", "18", "19.0.0", "20.0.0"]
         arch: [x64]
     steps:
       - name: Set up Git repository
