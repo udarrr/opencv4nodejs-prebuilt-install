@@ -1,7 +1,7 @@
 const path = require("path");
 const { basename } = require("path");
 const { resolvePath } = require("../lib/commons");
-const package = require('../package.json')
+const package = require("../package.json");
 
 function getPathToDirLib() {
   if (process.platform === "darwin" && process.arch === "arm64") {
@@ -19,15 +19,15 @@ function getPathToLib(pathToDir) {
   if (process.platform === "darwin" && process.arch === "arm64") {
     return resolvePath(path.join(pathToDir, `libopencv_world.${package.opencv4nodejs.autoBuildOpencvVersion}.dylib`));
   } else if (process.platform === "darwin" && process.arch !== "arm64") {
-    const version = package.opencv4nodejs.autoBuildOpencvVersion.slice(0,3);
+    const version = package.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3);
 
     return resolvePath(pathToDir, `libopencv_world.${version}.dylib`);
   } else if (process.platform === "win32") {
-    const version = package.opencv4nodejs.autoBuildOpencvVersion.replace('.', '').replace('.', '');
+    const version = package.opencv4nodejs.autoBuildOpencvVersion.replace(".", "").replace(".", "");
 
     return resolvePath(path.join(pathToDir, `opencv_world${version}.lib`));
   } else if (process.platform === "linux") {
-    const version = package.opencv4nodejs.autoBuildOpencvVersion.slice(0,3);
+    const version = package.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3);
 
     return resolvePath(path.join(pathToDir, `libopencv_world.so.${version}`));
   }
