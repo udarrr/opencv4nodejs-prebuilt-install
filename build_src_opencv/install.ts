@@ -52,6 +52,7 @@ class InstallOpencv {
 
     // prevent rebuild on every install
     const autoBuildFile = readAutoBuildFile();
+    
     if (autoBuildFile) {
       log.info("install", `found auto-build.json: ${dirs.autoBuildFile}`);
 
@@ -119,7 +120,7 @@ class InstallOpencv {
       } else if (process.platform === "linux") {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
-          path.join(`opencv", "build", "lib", "libopencv_world.so.${packageJSON.opencv4nodejs.autoBuildOpencvVersion}`),
+          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJSON.opencv4nodejs.autoBuildOpencvVersion}`),
           path.join("opencv", "build", "bin"),
         ];
 
