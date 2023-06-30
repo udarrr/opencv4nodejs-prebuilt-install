@@ -9,7 +9,7 @@ import { setupOpencv } from "./setupOpencv";
 import { AutoBuildFile } from "./types";
 import { isOSX, isWin, requireCmake, requireGit } from "./utils";
 import { Pack } from "./pack";
-import packageJSON from '../package.json'
+const packageJSON = require('../package.json');
 const log = require("npmlog");
 const getLibs = getLibsFactory({ isWin, isOSX, opencvModules, path, fs });
 

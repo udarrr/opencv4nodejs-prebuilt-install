@@ -11,7 +11,6 @@
     "target": "ES2019",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "typeRoots": ["typings", "node_modules/@types"]
   },
   "formatCodeOptions": {
