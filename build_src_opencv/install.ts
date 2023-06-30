@@ -9,7 +9,7 @@ import { setupOpencv } from "./setupOpencv";
 import { AutoBuildFile } from "./types";
 import { isOSX, isWin, requireCmake, requireGit } from "./utils";
 import { Pack } from "./pack";
-const packageJSON = require('../package.json');
+const packageJSON = require("../package.json");
 const log = require("npmlog");
 const getLibs = getLibsFactory({ isWin, isOSX, opencvModules, path, fs });
 
@@ -52,7 +52,7 @@ class InstallOpencv {
 
     // prevent rebuild on every install
     const autoBuildFile = readAutoBuildFile();
-    
+
     if (autoBuildFile) {
       log.info("install", `found auto-build.json: ${dirs.autoBuildFile}`);
 
@@ -112,7 +112,7 @@ class InstallOpencv {
       if (process.platform === "darwin") {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
-          path.join("opencv", "build", "lib", `libopencv_world.${packageJSON.opencv4nodejs.autoBuildOpencvVersion}.dylib`),
+          path.join("opencv", "build", "lib", `libopencv_world.${packageJSON.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}.dylib`),
           path.join("opencv", "build", "bin"),
         ];
 
@@ -120,7 +120,7 @@ class InstallOpencv {
       } else if (process.platform === "linux") {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
-          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJSON.opencv4nodejs.autoBuildOpencvVersion}`),
+          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJSON.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}`),
           path.join("opencv", "build", "bin"),
         ];
 
