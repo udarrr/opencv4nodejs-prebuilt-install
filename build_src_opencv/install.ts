@@ -9,6 +9,7 @@ import { setupOpencv } from "./setupOpencv";
 import { AutoBuildFile } from "./types";
 import { isOSX, isWin, requireCmake, requireGit } from "./utils";
 import { Pack } from "./pack";
+const packageJSON = require("../package.json");
 
 const log = require("npmlog");
 
@@ -109,13 +110,25 @@ class InstallOpencv {
     packageJson.opencv4nodejs.disableAutoBuild = 1;
 
     try {
-      let patterns: Array<string> = [path.join("opencv", "build", "include"), path.join("opencv", "build", "lib"), path.join("opencv", "build", "bin")];
-
       if (process.platform === "darwin") {
+        let patterns: Array<string> = [
+          path.join("opencv", "build", "include"),
+          path.join("opencv", "build", "lib", `libopencv_world.${packageJSON.autoBuildOpencvVersion}.dylib`),
+          path.join("opencv", "build", "bin"),
+        ];
+
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
       } else if (process.platform === "linux") {
+        let patterns: Array<string> = [
+          path.join("opencv", "build", "include"),
+          path.join(`opencv", "build", "lib", "libopencv_world.so.${packageJSON.autoBuildOpencvVersion}`),
+          path.join("opencv", "build", "bin"),
+        ];
+
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`);
       } else if (process.platform === "win32") {
+        let patterns: Array<string> = [path.join("opencv", "build", "include"), path.join("opencv", "build", "lib"), path.join("opencv", "build", "bin")];
+
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`);
       }
       fs.writeFileSync(filename, JSON.stringify(packageJson, null, 2));

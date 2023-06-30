@@ -1,7 +1,6 @@
 const path = require("path");
 import blob from "@u4/tiny-glob";
 import tar from "tar";
-const pump = require("pump");
 
 export class Pack {
   static cb(err: any) {

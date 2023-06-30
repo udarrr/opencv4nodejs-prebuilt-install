@@ -92,7 +92,7 @@ jobs:
             version: latest
           - name: Windows
             version: 2019
-        node: ["12", "14", "16", "18", "19.0.0", "20.0.0"]
+        node: ["12", "13", "14", "15", "16", "18", "19.0.0", "20.0.0"]
         arch: [x64]
     steps:
       - name: Set up Git repository
@@ -131,112 +131,112 @@ jobs:
           artifacts: "prebuilds/*.tar.gz"
           allowUpdates: true
 
-  # prebuild-electron-node14:
-  #   needs:
-  #     - prebuild-lib
-  #   name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
-  #   runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+  prebuild-electron-node14:
+    needs:
+      - prebuild-lib
+    name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
-  #   strategy:
-  #     matrix:
-  #       os:
-  #         - name: Ubuntu
-  #           version: latest
-  #         - name: macOS
-  #           version: latest
-  #         - name: Windows
-  #           version: 2019
-  #       node: ["14"]
-  #       arch: [x64]
-  #       runtime: [electron]
-  #       electron:
-  #         ["8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0", "14.0.0"]
-  #   steps:
-  #     - name: Set up Git repository
-  #       uses: actions/checkout@v2
-  #     - name: Set up node
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         architecture: ${{ matrix.arch }}
-  #     - name: "Install npm@^8 to get a more up to date bundled node-gyp"
-  #       run: npm install --global npm@8.3.1
-  #     - name: "Install Linux dependencies"
-  #       if: ${{ matrix.os.name == 'Ubuntu' }}
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install libudev-dev
-  #     - name: "Install python"
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: "3.9"
-  #     - name: "Install Mac dependencies"
-  #       if: ${{ matrix.os.name == 'macos' }}
-  #       uses: maxim-lobanov/setup-xcode@v1
-  #       with:
-  #         xcode-version: latest
-  #     - name: Install
-  #       run: npm ci --unsafe-perm
-  #     - name: Prebuild
-  #       shell: bash
-  #       run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
-  #     - uses: ncipollo/release-action@v1
-  #       with:
-  #         artifacts: "prebuilds/*.tar.gz"
-  #         allowUpdates: true
+    strategy:
+      matrix:
+        os:
+          - name: Ubuntu
+            version: latest
+          - name: macOS
+            version: latest
+          - name: Windows
+            version: 2019
+        node: ["14"]
+        arch: [x64]
+        runtime: [electron]
+        electron:
+          ["8.0.0", "9.0.0", "10.0.0", "11.0.0", "12.0.0", "13.0.0", "14.0.0"]
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          architecture: ${{ matrix.arch }}
+      - name: "Install npm@^8 to get a more up to date bundled node-gyp"
+        run: npm install --global npm@8.3.1
+      - name: "Install Linux dependencies"
+        if: ${{ matrix.os.name == 'Ubuntu' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install libudev-dev
+      - name: "Install python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: "Install Mac dependencies"
+        if: ${{ matrix.os.name == 'macos' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild
+        shell: bash
+        run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "prebuilds/*.tar.gz"
+          allowUpdates: true
 
-  # prebuild-electron-node16:
-  #   needs:
-  #     - prebuild-lib
-  #   name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
-  #   runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+  prebuild-electron-node16:
+    needs:
+      - prebuild-lib
+    name: "Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }} electron ${{ matrix.electron }}"
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
-  #   strategy:
-  #     matrix:
-  #       os:
-  #         - name: Ubuntu
-  #           version: latest
-  #         - name: macOS
-  #           version: latest
-  #         - name: Windows
-  #           version: 2019
-  #       node: ["16"]
-  #       arch: [x64]
-  #       runtime: [electron]
-  #       electron: ["15.0.0", "16.0.0", "17.0.0", "18.0.0", "19.0.0"]
-  #   steps:
-  #     - name: Set up Git repository
-  #       uses: actions/checkout@v2
-  #     - name: Set up node
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         architecture: ${{ matrix.arch }}
-  #     - name: "Install npm@^8 to get a more up to date bundled node-gyp"
-  #       run: npm install --global npm@8.3.1
-  #     - name: "Install Linux dependencies"
-  #       if: ${{ matrix.os.name == 'Ubuntu' }}
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install libudev-dev
-  #     - name: "Install python"
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: "3.9"
-  #     - name: "Install Mac dependencies"
-  #       if: ${{ matrix.os.name == 'macos' }}
-  #       uses: maxim-lobanov/setup-xcode@v1
-  #       with:
-  #         xcode-version: latest
-  #     - name: Install
-  #       run: npm ci --unsafe-perm
-  #     - name: Prebuild
-  #       shell: bash
-  #       run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
-  #     - uses: ncipollo/release-action@v1
-  #       with:
-  #         artifacts: "prebuilds/*.tar.gz"
-  #         allowUpdates: true
+    strategy:
+      matrix:
+        os:
+          - name: Ubuntu
+            version: latest
+          - name: macOS
+            version: latest
+          - name: Windows
+            version: 2019
+        node: ["16"]
+        arch: [x64]
+        runtime: [electron]
+        electron: ["15.0.0", "16.0.0", "17.0.0", "18.0.0", "19.0.0"]
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          architecture: ${{ matrix.arch }}
+      - name: "Install npm@^8 to get a more up to date bundled node-gyp"
+        run: npm install --global npm@8.3.1
+      - name: "Install Linux dependencies"
+        if: ${{ matrix.os.name == 'Ubuntu' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install libudev-dev
+      - name: "Install python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: "Install Mac dependencies"
+        if: ${{ matrix.os.name == 'macos' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild
+        shell: bash
+        run: npm run create_opencvnode_prebuild -- -t ${{matrix.electron}} -r ${{matrix.runtime}}
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "prebuilds/*.tar.gz"
+          allowUpdates: true
 
   # deploy:
   #   needs:
