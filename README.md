@@ -1,4 +1,4 @@
-# opencv4nodejs-prebuilt-install special build for template matching
+# opencv4nodejs-prebuilt-install
 
 ![Tested](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Tests/badge.svg)
 ![Released](https://github.com/udarrr/opencv4nodejs-prebuilt-install/workflows/Create%20tagged%20release/badge.svg)
@@ -57,7 +57,7 @@ Set your own properties inside of package.json for opencv4nodejs up to 4.6.0 dep
 npm run create_opencvlib
 ```
 
-Result in folder osOpencvWorlds/*/*.tar
+Result in folder osOpencvWorlds/\*/\*.tar
 
 - and then for building opencv for current node with have been prepared files for processor
 
