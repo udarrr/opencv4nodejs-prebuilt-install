@@ -112,17 +112,17 @@ class InstallOpencv {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
           path.join("opencv", "build", "lib", `libopencv_world.${packageJson.opencv4nodejs.autoBuildOpencvVersion}.dylib`),
+          path.join("opencv", "build", "lib", `libopencv_world.${packageJson.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}.dylib`),
           path.join("opencv", "build", "bin"),
         ];
-
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`);
       } else if (process.platform === "linux") {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
           path.join("opencv", "build", "lib", `libopencv_world.so.${packageJson.opencv4nodejs.autoBuildOpencvVersion}`),
+          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJson.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}`),
           path.join("opencv", "build", "bin"),
         ];
-
         await Pack.pack(patterns, `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`);
       } else if (process.platform === "win32") {
         let patterns: Array<string> = [path.join("opencv", "build", "include"), path.join("opencv", "build", "lib"), path.join("opencv", "build", "bin")];
