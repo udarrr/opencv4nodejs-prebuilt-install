@@ -13,13 +13,16 @@ Cross-platform!
 
 - Windows, Linux , MacOS
 - node 12,14,15,16,17,18,19,20
-- arh x64
+- electron 8,9,10,11,12,13,14,15,16,17,18,19,22,23,24,25
+- currently arh x64 (possible M1, arm64 and others if were available hosts with the type of processes)
 
 ## How to install
 
 ``` bash
 npm i opencv4nodejs-prebuilt-install
 ```
+
+check supporting platforms and processes!
 
 - prebuilt in node_modules/opencv4nodejs-prebuilt-install/build
 
@@ -37,7 +40,7 @@ import * as cv from 'opencv4nodejs-prebuilt-install'
 
 ## Local compiling
 
-Set your own properties inside of package.json
+Set your own properties inside of package.json for opencv4nodejs up to 4.6.0 depends on necessary versions and flags
 
 ```nodejs
   "opencv4nodejs": {
@@ -54,7 +57,7 @@ Set your own properties inside of package.json
 npm run create_opencvlib
 ```
 
-Result in folder osOpencvWorlds/opencv/build/bin for windows or osOpencvWorlds/opencv/build/lib for linux and darwin
+Result in folder osOpencvWorlds/*/*.tar
 
 - and then for building opencv for current node with have been prepared files for processor
 
@@ -64,9 +67,11 @@ npm run create_opencvnode_prebuild
 
 Result in folder opencv/build/bin for windows or in opencv/build/lib for linux and darwin
 
-## Add bindings to native methos of opencv
+## Add bindings to native methods of opencv
 
-For example method invert
+Create fork of the repo and add necessary changes then create poll request to the repo and i will recreate libs
+
+For example i was able to add method invert recently
 
 - added to core.cc
 

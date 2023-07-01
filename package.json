@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.189",
+  "version": "4.1.190",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -59,7 +59,6 @@
   },
   "gypfile": false,
   "dependencies": {
-    "@nut-tree/opencv-build-linux": "^4.1.1-7",
     "@u4/tiny-glob": "^0.3.2",
     "@udarrr/prebuild": "^11.0.6",
     "nan": "^2.17.0",
