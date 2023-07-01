@@ -55,6 +55,8 @@ NAN_MODULE_INIT(Core::Init) {
   Nan::SetMethod(target, "eigenAsync", EigenAsync);
   Nan::SetMethod(target, "solve", Solve);
   Nan::SetMethod(target, "solveAsync", SolveAsync);
+  Nan::SetMethod(target, "invert", Invert);
+  Nan::SetMethod(target, "invertAsync", InvertAsync);
 };
 
 NAN_METHOD(Core::GetBuildInformation) {
@@ -369,4 +371,12 @@ NAN_METHOD(Core::Solve) {
 
 NAN_METHOD(Core::SolveAsync) {
 	FF::asyncBinding<CoreBindings::Solve>("Core", "Solve", info);
+}
+
+NAN_METHOD(Core::Invert) {
+	FF::syncBinding<CoreBindings::Invert>("Core", "Invert", info);
+}
+
+NAN_METHOD(Core::InvertAsync) {
+	FF::asyncBinding<CoreBindings::Invert>("Core", "Invert", info);
 }

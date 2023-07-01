@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "removeComments": false,
+    "declaration": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "outDir": "build_release_opencv",
+    "module": "commonjs",
+    "target": "ES2019",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "typeRoots": ["typings", "node_modules/@types"]
+  },
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2
+  },
+  "include": ["build_src_opencv"]
+}

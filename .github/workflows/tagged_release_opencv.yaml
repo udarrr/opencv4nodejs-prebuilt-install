@@ -1,0 +1,79 @@
+name: Create tagged release
+on:
+  push:
+    tags:
+      - vcv4.1.*
+
+jobs:
+  prebuild-node:
+    name: 'Build on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+
+    strategy:
+      matrix:
+        os:
+          - name: Ubuntu
+            version: latest
+          - name: macOS
+            version: latest
+          - name: Windows
+            version: 2019
+        node: ['16']
+        arch: [x64]
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          architecture: ${{ matrix.arch }}
+      - name: 'Install npm@^8 to get a more up to date bundled node-gyp'
+        run: npm install --global npm@8.3.1
+      - name: 'Add Windows apps'
+        if: ${{ matrix.os.name == 'Windows' }}
+        run: |
+          choco install cmake -y
+          choco upgrade cmake
+      - name: 'Setup-msbuild'
+        if: ${{ matrix.os.name == 'Windows' }}
+        uses: microsoft/setup-msbuild@v1.1.3
+      - name: 'Add Linux apps'
+        if: ${{ matrix.os.name == 'Ubuntu' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+          sudo apt-get install libxvidcore-dev libx264-dev
+          sudo apt-get install cmake
+      - name: 'Add macos apps'
+        if: ${{ matrix.os.name == 'macos' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: 'Install python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Dependency install
+        run: npm ci --unsafe-perm
+      - name: Create opencvlib
+        run: npm run create_opencvlib
+      - name: 'Send Windows release to storage'
+        if: ${{ matrix.os.name == 'Windows' }}
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "osOpencvWorlds/win32/*.tgz"
+          allowUpdates: true
+      - name: 'Send macos release to storage'
+        if: ${{ matrix.os.name == 'macos' }}
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "osOpencvWorlds/darwin/*.tgz"
+          allowUpdates: true
+      - name: 'Send Ubuntu release to storage'
+        if: ${{ matrix.os.name == 'Ubuntu' }}
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "osOpencvWorlds/linux/*.tgz"
+          allowUpdates: true
+       

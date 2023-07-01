@@ -243,6 +243,18 @@ namespace CoreBindings {
 		};
 	};
 
+	class Invert : public CvClassMethodBinding<Mat> {
+	public:
+		void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
+	        auto flags = opt<FF::IntConverter>("flags", 0);
+			auto dst = ret<Mat::Converter>("dst");
+
+			executeBinding = [=]() {
+				cv::invert(self->ref(), dst->ref(), flags->ref());
+			};
+		};
+	};
+
 	class Normalize : public CvClassMethodBinding<Mat> {
 	public:
 		void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {

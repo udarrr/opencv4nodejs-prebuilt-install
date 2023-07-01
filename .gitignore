@@ -1,8 +1,7 @@
 vs
 .vs
 .vscode
-build
-bin
+./build
 node_modules
 crash.log
 coverage
@@ -10,6 +9,8 @@ coverage-report
 tmpdata
 data/dnn
 .idea/
-dist
 .DS_Store
 native-node-utils
+build
+opencv
+build_release_opencv
