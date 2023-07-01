@@ -17,15 +17,15 @@ function getPathToDirLib() {
 
 function getPathToLib(pathToDir) {
   if (process.platform === "darwin" && process.arch === "arm64") {
-    return resolvePath(path.join(pathToDir, `libopencv_world.${package.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}.dylib`));
+    return resolvePath(path.join(pathToDir, `libopencv_world.${package.opencv4nodejs.autoBuildOpencvVersion}.dylib`));
   } else if (process.platform === "darwin" && process.arch !== "arm64") {
-    return resolvePath(pathToDir, `libopencv_world.${package.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}.dylib`);
+    return resolvePath(pathToDir, `libopencv_world.${package.opencv4nodejs.autoBuildOpencvVersion}.dylib`);
   } else if (process.platform === "win32") {
     const version = package.opencv4nodejs.autoBuildOpencvVersion.replace(".", "").replace(".", "");
 
     return resolvePath(path.join(pathToDir, `opencv_world${version}.lib`));
   } else if (process.platform === "linux") {
-    return resolvePath(path.join(pathToDir, `libopencv_world.so.${package.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}`));
+    return resolvePath(path.join(pathToDir, `libopencv_world.so.${package.opencv4nodejs.autoBuildOpencvVersion}`));
   }
 }
 

@@ -113,7 +113,7 @@ class InstallOpencv {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
           path.join("opencv", "build", "lib", `libopencv_world.${packageJson.opencv4nodejs.autoBuildOpencvVersion}.dylib`),
-          path.join("opencv", "build", "lib", `libopencv_world.${packageJson.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}.dylib`),
+          path.join("opencv", "build", "lib", `libopencv_world.${packageJson.opencv4nodejs.autoBuildOpencvVersion}.dylib`),
           path.join("opencv", "build", "bin"),
         ];
 
@@ -122,7 +122,7 @@ class InstallOpencv {
         let patterns: Array<string> = [
           path.join("opencv", "build", "include"),
           path.join("opencv", "build", "lib", `libopencv_world.so.${packageJson.opencv4nodejs.autoBuildOpencvVersion}`),
-          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJson.opencv4nodejs.autoBuildOpencvVersion.slice(0, 3)}`),
+          path.join("opencv", "build", "lib", `libopencv_world.so.${packageJson.opencv4nodejs.autoBuildOpencvVersion}`),
           path.join("opencv", "build", "bin"),
         ];
 
