@@ -6,26 +6,9 @@ const packageJson = require("../package.json");
 const path = require("path");
 const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}_${process.arch}.tgz`;
 async function download() {
-  let libUrl;
-  let dir;
-  if (process.platform === "win32") {
-    libUrl = `https://github.com/udarrr/opencv4nodejs-prebuilt-install/releases/download/v${
-      packageJson.version
-    }/opencv_win32_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
-    dir = path.join(process.cwd(), "osOpencvWorlds", "win32");
-  }
-  if (process.platform === "darwin") {
-    libUrl = `https://github.com/udarrr/opencv4nodejs-prebuilt-install/releases/download/v${
-      packageJson.version
-    }/opencv_darwin_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
-    dir = path.join(process.cwd(), "osOpencvWorlds", "darwin");
-  }
-  if (process.platform === "linux") {
-    libUrl = `https://github.com/udarrr/opencv4nodejs-prebuilt-install/releases/download/v${
-      packageJson.version
-    }/opencv_linux_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
-    dir = path.join(process.cwd(), "osOpencvWorlds", "linux");
-  }
+  let libUrl = `https://github.com/udarrr/opencv4nodejs-prebuilt-install/releases/download/v${packageJson.version}/${file}`;
+  let dir = path.join(process.cwd(), "osOpencvWorlds", "win32");
+
   const downloader = new Downloader({
     url: libUrl,
     directory: dir,
