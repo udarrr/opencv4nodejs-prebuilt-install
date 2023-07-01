@@ -93,7 +93,7 @@ class InstallOpencv {
   static async start() {
     const filename = path.join(process.cwd(), "package.json");
     const packageJson = require(filename);
-    const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
+    const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}_${process.arch}.tgz`;
 
     delete packageJson.opencv4nodejs.disableAutoBuild;
 
@@ -106,7 +106,6 @@ class InstallOpencv {
 
     await InstallOpencv.install();
     packageJson.opencv4nodejs.disableAutoBuild = 1;
-    let patterns: Array<string> = [path.join("opencv", "build", "include"), path.join("opencv", "build", "lib"), path.join("opencv", "build", "bin")];
 
     try {
       if (process.platform === "darwin") {

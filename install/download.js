@@ -4,7 +4,7 @@ const pack_1 = require("../build_release_opencv/pack");
 const Downloader = require("nodejs-file-downloader");
 const packageJson = require("../package.json");
 const path = require("path");
-const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}.tgz`;
+const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}_${process.arch}.tgz`;
 async function download() {
   let libUrl;
   let dir;
