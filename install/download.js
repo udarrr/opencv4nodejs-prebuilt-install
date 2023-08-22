@@ -8,31 +8,63 @@ const { existsSync } = require("fs");
 const file = `opencv_${process.platform}_${packageJson.opencv4nodejs.autoBuildOpencvVersion}_${process.arch}.tgz`;
 console.log(file);
 
-async function download() {
+async function downloadLib() {
   let libUrl = `https://github.com/udarrr/opencv4nodejs-prebuilt-install/releases/download/v${packageJson.version}/${file}`;
 
   try {
     if (process.platform === "darwin" && process.arch !== "arm64") {
-      const pathToLib = `${path.join(process.cwd(), "osOpencvWorlds", "darwin", file)}`;
+      const pathToLib = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "darwin",
+        file
+      )}`;
       const pathToDir = path.join(process.cwd(), "osOpencvWorlds", "darwin");
 
       await downloadIfExist(pathToDir, pathToLib, libUrl);
       await pack_1.Pack.unpack(pathToDir, pathToLib);
     } else if (process.platform === "darwin" && process.arch === "arm64") {
-      const pathToLib = `${path.join(process.cwd(), "osOpencvWorlds", "darwinM1", file)}`;
-      const pathToDir = `${path.join(process.cwd(), "osOpencvWorlds", "darwinM1")}`;
+      const pathToLib = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "darwinM1",
+        file
+      )}`;
+      const pathToDir = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "darwinM1"
+      )}`;
 
       await downloadIfExist(pathToDir, pathToLib, libUrl);
       await pack_1.Pack.unpack(pathToDir, pathToLib);
     } else if (process.platform === "linux") {
-      const pathToLib = `${path.join(process.cwd(), "osOpencvWorlds", "linux", file)}`;
-      const pathToDir = `${path.join(process.cwd(), "osOpencvWorlds", "linux")}`;
+      const pathToLib = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "linux",
+        file
+      )}`;
+      const pathToDir = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "linux"
+      )}`;
 
-      await downloadIfExist(pathToDir, pathToLib);
-      await pack_1.Pack.unpack(pathToDir, pathToLib, libUrl);
+      await downloadIfExist(pathToDir, pathToLib, libUrl);
+      await pack_1.Pack.unpack(pathToDir, pathToLib);
     } else if (process.platform === "win32") {
-      const pathToLib = `${path.join(process.cwd(), "osOpencvWorlds", "win32", file)}`;
-      const pathToDir = `${path.join(process.cwd(), "osOpencvWorlds", "win32")}`;
+      const pathToLib = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "win32",
+        file
+      )}`;
+      const pathToDir = `${path.join(
+        process.cwd(),
+        "osOpencvWorlds",
+        "win32"
+      )}`;
 
       await downloadIfExist(pathToDir, pathToLib, libUrl);
       await pack_1.Pack.unpack(pathToDir, pathToLib);
@@ -50,11 +82,21 @@ async function download() {
 
 async function downloadIfExist(pathToDir, pathToLib, libUrl) {
   if (!existsSync(pathToLib)) {
-    await new Downloader({
+    console.log(
+      JSON.stringify({
+        url: libUrl,
+        directory: pathToDir
+      })
+    );
+
+    const downloaderInstance = new Downloader({
       url: libUrl,
-      directory: pathToDir,
-    }).download();
+      directory: pathToDir
+    });
+    const report = await downloaderInstance.download();
+
+    console.log(JSON.stringify(report));
   }
 }
 
-download();
+downloadLib();
