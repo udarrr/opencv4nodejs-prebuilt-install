@@ -13,7 +13,7 @@ jobs:
       matrix:
         os:
           - name: Ubuntu
-            version: latest
+            version: 20.04
           - name: macOS
             version: latest
           - name: Windows
@@ -87,7 +87,7 @@ jobs:
       matrix:
         os:
           - name: Ubuntu
-            version: latest
+            version: 20.04
           - name: macOS
             version: latest
           - name: Windows
@@ -141,7 +141,7 @@ jobs:
       matrix:
         os:
           - name: Ubuntu
-            version: latest
+            version: 20.04
           - name: macOS
             version: latest
           - name: Windows
@@ -195,7 +195,7 @@ jobs:
       matrix:
         os:
           - name: Ubuntu
-            version: latest
+            version: 20.04
           - name: macOS
             version: latest
           - name: Windows

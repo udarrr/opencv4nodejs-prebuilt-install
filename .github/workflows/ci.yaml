@@ -6,14 +6,14 @@ on:
 
 jobs:
   prebuild-node:
-    name: 'Test on Node v${{ matrix.node }} ${{ matrix.os.name }} ${{ matrix.arch }}'
+    name: 'Test on Node v${{ matrix.node }} ${{ matrix.os.name }}-${{ matrix.os.version }} ${{ matrix.arch }}'
     runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
 
     strategy:
       matrix:
         os:
           - name: Ubuntu
-            version: latest
+            version: [20.04, latest]
           - name: macOS
             version: latest
           - name: Windows
