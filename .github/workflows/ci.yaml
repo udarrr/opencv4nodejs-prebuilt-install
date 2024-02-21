@@ -13,7 +13,7 @@ jobs:
       matrix:
         os:
           - name: Ubuntu
-            version: [20.04, latest]
+            version: 20.04
           - name: macOS
             version: latest
           - name: Windows
