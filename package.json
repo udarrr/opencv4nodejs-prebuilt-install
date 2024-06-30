@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-prebuilt-install",
-  "version": "4.1.206",
+  "version": "4.1.207",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -45,17 +45,16 @@
     "publish_package": "npm publish --tag latest --access=public",
     "build_src_opencvlib": "rimraf build_release_opencv &&  rimraf opencv && rimraf osOpencvWorlds/linux/opencv && rimraf osOpencvWorlds/win32/opencv && rimraf osOpencvWorlds/darwin/opencv && tsc",
     "create_opencvlib": "npm run build_src_opencvlib && node build_release_opencv/install.js",
-    "create_opencvnode_prebuild": "npm run build_src_opencvlib && node install/download.js && rimraf osOpencvWorlds/linux/opencv/build/lib/cmake && prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
+    "create_opencvnode_prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
   },
   "opencv4nodejs": {
     "autoBuildWithoutContrib": 1,
     "autoBuildOpencvVersion": "4.1.1",
-    "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui,videoio -DOPENCV_FORCE_3RDPARTY_BUILD=ON -DBUILD_PNG=ON -DBUILD_TIFF=ON -DBUILD_JASPER=ON -DBUILD_JPEG=ON -DBUILD_ZLIB=ON -DBUILD_OPENEXR=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER=ON -DBUILD_USE_SYMLINKS=OFF -DWITH_VTK=OFF",
-    "disableAutoBuild": 1
+    "autoBuildFlags": "-DBUILD_opencv_world=1 -DBUILD_LIST=core,highgui,videoio -DOPENCV_FORCE_3RDPARTY_BUILD=ON -DBUILD_PNG=ON -DBUILD_TIFF=ON -DBUILD_JASPER=ON -DBUILD_JPEG=ON -DBUILD_ZLIB=ON -DBUILD_OPENEXR=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER=ON -DBUILD_USE_SYMLINKS=OFF -DWITH_VTK=OFF"
   },
   "gypfile": false,
   "dependencies": {
-    "prebuild-install": "^7.1.1"
+    "prebuild-install": "^7.1.2"
   },
   "devDependencies": {
     "@types/tar": "^6.1.5",
@@ -71,7 +70,7 @@
     "tar": "^6.1.15"
   },
   "engines": {
-    "node": ">=12.0.0 <22.0.0"
+    "node": ">=12.0.0 <21.0.0"
   },
   "os": [
     "linux",
